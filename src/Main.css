@@ -1,0 +1,32 @@
+/* src/styles/App.css */
+.scroll-container {
+    display: flex;
+    justify-content: center; /* Posisikan konten di tengah secara horizontal */
+    align-items: center;
+    flex-direction: column;
+    overflow-y: scroll; /* Selalu tampilkan scrollbar vertical */
+    padding-top: 1.5rem;
+    height: 100vh; /* Atur tinggi elemen sesuai kebutuhan */
+    scrollbar-width: thin; /* Ukuran scrollbar untuk Firefox */
+    scrollbar-color: #4a5568 #2d3748; /* Warna scrollbar untuk Firefox */
+    min-height: 100vh;
+  }
+  
+  /* Gaya untuk scrollbar di WebKit (Chrome, Safari) */
+  .scroll-container::-webkit-scrollbar {
+    width: 8px; /* Lebar scrollbar */
+  }
+  
+  .scroll-container::-webkit-scrollbar-track {
+    background: #2d3748; /* Warna latar belakang scrollbar */
+  }
+  
+  .scroll-container::-webkit-scrollbar-thumb {
+    background: #4a5568; /* Warna scrollbar */
+    border-radius: 10px; /* Radius border untuk scrollbar */
+  }
+  
+  .scroll-container::-webkit-scrollbar-thumb:hover {
+    background: #2d3748; /* Warna scrollbar saat hover */
+  }
+  

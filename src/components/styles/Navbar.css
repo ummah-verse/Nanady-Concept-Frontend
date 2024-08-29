@@ -1,0 +1,17 @@
+.custom-icon {
+    stroke: currentColor; /* Use current text color */
+    stroke-width: 50px;
+  }
+
+.navbar {
+  background-color: rgb(12, 12, 12);
+  width: 40vw;
+  color: rgba(231, 231, 231, 0.61);
+}
+
+.navbar a {
+  display: flex;
+  justify-content: center;
+  width: 5rem;
+}
+  
