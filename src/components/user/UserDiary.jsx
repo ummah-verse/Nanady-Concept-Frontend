@@ -4,9 +4,9 @@ import { GoComment } from "react-icons/go";
 import { IoLocationOutline } from "react-icons/io5";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
-import './styles/Diary.css';
+import './styles/UserDiary.css';
 
-const Diary = () => {
+const UserDiary = () => {
     const [visiblePosts, setVisiblePosts] = useState(6);
     const [currentSlideIndex, setCurrentSlideIndex] = useState({}); // Track slide index for each post
     const [maxHeight, setMaxHeight] = useState(0);
@@ -179,4 +179,4 @@ const Diary = () => {
     );
 };
 
-export default Diary;
+export default UserDiary;

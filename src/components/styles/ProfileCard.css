@@ -1,0 +1,89 @@
+.profile-card {
+    background-color: rgb(14, 14, 15);
+}
+
+.menu-profile {
+    font-size: 14px;
+    background-color: rgb(20, 20, 20);
+}
+
+@media only screen and (max-width: 768px) and (orientation: portrait) {
+    .photo-profile {
+        width: 70px;
+        height: auto;
+    }
+
+    .name {
+        font-size: 13px;
+    }
+
+    .username {
+        font-size: 13px;
+    }
+
+    .bio {
+        margin: 0;
+        font-size: 13px;
+    }
+
+    .joined-on {
+        font-size: 13px;
+    }
+
+    .menu-card {
+        display:flex;
+        flex-direction: column;
+        margin-top: 0;
+    }
+
+    .menu-buttons {
+        width: 100%;
+        font-size: 13px;
+        display:flex;
+        flex-direction: row;
+        margin-top: 1rem;
+    }
+
+    .menu-buttons button {
+        width: 100%;
+    }
+
+    .menu-profile {
+        display: inline-block;
+        width: 100%;
+        font-size: 13px;
+        margin: 2;
+        padding: 2;
+    }
+}
+
+@media only screen and (max-width: 1328px) and (orientation: landscape) {
+    .menu-card {
+        display:flex;
+        flex-direction: column;
+        margin-top: 0;
+    }
+
+    .menu-buttons {
+        font-size: 13px;
+        display:flex;
+        flex-direction: row;
+        margin-top: 1rem;
+    }
+
+    .menu-buttons button {
+        width: 100%;
+    }
+
+    .menu-buttons a {
+        width: 100%;
+    }
+
+    .menu-profile {
+        display: inline-block;
+        width: 100%;
+        font-size: 13px;
+        margin: 2;
+        padding: 2;
+    }
+}

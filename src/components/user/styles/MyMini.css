@@ -1,0 +1,35 @@
+.video-container {
+    position: relative;
+    width: 100%;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+    max-height: 1000px; /* Tentukan max-height untuk video */
+    overflow: hidden;
+}
+
+.mini-post {
+    padding-bottom: 1.25rem !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.514);
+}
+
+.video-player {
+    width: auto;
+    height: 100%;
+}
+
+.reactions {
+    width: 50px;
+}
+
+.popup-video-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.max-video-popup {
+    max-height: 80vh;
+}

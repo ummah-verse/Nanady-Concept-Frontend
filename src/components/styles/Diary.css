@@ -1,0 +1,21 @@
+.diary-post {
+    padding-bottom: 1.25rem !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.514);
+}
+
+.slide-content {
+    min-height: 210px;
+}
+
+@media only screen and (max-width: 410px) and (orientation: portrait) {
+    .slide-content {
+        min-height: 395px;
+    }
+}
+
+@media only screen and (max-width: 450px) and (orientation: portrait) {
+    .slide-content {
+        min-height: 325px;
+    }
+}
+  

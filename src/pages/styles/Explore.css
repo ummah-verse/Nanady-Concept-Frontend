@@ -1,0 +1,57 @@
+.navbar-home {
+    max-width: 50vw;
+    width: 50vw;
+}
+
+.content-container {
+    min-height: 500px;
+    width: 40vw;
+}
+
+.search-bar {
+    outline: none;
+}
+
+.search-result {
+    min-height: 500px;
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+/* For Webkit-based browsers (e.g., Chrome, Safari) */
+.search-result::-webkit-scrollbar {
+    width: 8px; /* Make the scrollbar thinner */
+}
+
+.search-result::-webkit-scrollbar-track {
+    background: rgba(23, 23, 24, 0.6); /* Dark, semi-transparent background for the scrollbar track */
+    border-radius: 10px; /* Rounded edges for a smoother look */
+}
+
+.search-result::-webkit-scrollbar-thumb {
+    background-color: rgba(33, 34, 34, 0.8); /* Slightly darker, semi-transparent scrollbar thumb */
+    border-radius: 10px; /* Round the edges of the scrollbar thumb */
+    border: 2px solid transparent; /* Invisible border to create space between thumb and track */
+    background-clip: padding-box; /* Ensures the transparency doesn't bleed into the border */
+}
+
+.search-result::-webkit-scrollbar-button {
+    display: none; /* Hide the scrollbar buttons */
+}
+
+/* For Firefox */
+.search-result {
+    scrollbar-width: thin; /* Makes the scrollbar thinner */
+    scrollbar-color: rgb(63, 63, 63) rgb(37, 37, 37); /* Transparent thumb and track colors */
+}
+
+
+
+
+/* Media query untuk semua jenis handphone dalam orientasi portrait */
+@media only screen and (max-width: 768px) and (orientation: portrait) {
+    .content-container {
+        min-height: 100vh;
+        width: 100vw;
+    }
+}

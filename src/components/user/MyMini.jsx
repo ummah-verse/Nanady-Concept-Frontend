@@ -3,9 +3,9 @@ import { BiLike } from "react-icons/bi";
 import { GoComment } from "react-icons/go";
 import { IoLocationOutline } from "react-icons/io5";
 
-import './styles/Mini.css';
+import './styles/MyMini.css';
 
-const Mini = () => {
+const MyMini = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [selectedVideo, setSelectedVideo] = useState('');
     const [visiblePosts, setVisiblePosts] = useState(6);
@@ -152,4 +152,4 @@ const Mini = () => {
     );
 };
 
-export default Mini;
+export default MyMini;

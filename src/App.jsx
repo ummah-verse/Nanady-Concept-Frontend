@@ -5,12 +5,14 @@ import './Main.css'
 
 const App = () => {
   return (
-    <div className='scroll-container'>
-      <Navbar />
-      <div className="container mx-auto p-4 flex justify-center"> {/* Add container class */}
-        <Outlet /> {/* This will render the content based on the route */}
+      <div className='main-content-container'>
+        <div className='flex justify-center'>
+          <Navbar />
+        </div>
+            <div className="container mx-auto flex justify-center content-outlet"> {/* Add container class */}
+              <Outlet /> {/* This will render the content based on the route */}
+          </div>
       </div>
-    </div>
   );
 };
 
