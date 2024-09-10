@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { BiLike } from "react-icons/bi";
 import { GoComment } from "react-icons/go";
 import { IoLocationOutline } from "react-icons/io5";
+import { NavLink } from 'react-router-dom';
 
 import './styles/Yapping.css';
 
@@ -18,11 +19,12 @@ const Yapping = () => {
                 location: "kamar"
             },
             post: {
+                id : "1",
                 image: "https://ik.imagekit.io/eoeykxtr4/email.ejs%20-%20Ourair%20-%20Visual%20Studio%20Code%2022_05_2024%2015_01_57.png?updatedAt=1724947622963",
                 likes: 100,
                 comments: 50,
                 caption: "ngoding",
-                created_at : "29-08-2 4",
+                created_at : "29-08-24",
             }
         },
         {
@@ -32,6 +34,7 @@ const Yapping = () => {
                 location: "rumah verril"
             },
             post: {
+                id : "2",
                 image: "https://ik.imagekit.io/eoeykxtr4/WhatsApp%20Image%202024-08-28%20at%2018.06.29_a9edc7f9.jpg?updatedAt=1724947140115",
                 likes: 150,
                 comments: 75,
@@ -64,53 +67,78 @@ const Yapping = () => {
     });
 
     const renderPosts = postsData.slice(0, visiblePosts).map((postData, index) => (
-        <div key={index} className="flex items-start p-3 pb-5 px-6 pl-5 shadow-md mt-4 yapping-post">
-            {/* Foto Profil */}
-            <img className="w-10 h-10 image-icon rounded-full" src={postData.user.profileImage} alt="Profile" />
 
-            {/* Konten */}
-            <div className="ml-4 w-full">
-                {/* Username dan Caption */}
-                <p className="text-lg font-semibold text-gray-200">{postData.user.username}</p>
-                <p className="text-gray-300 text-sm mb-2">{postData.post.caption}</p>
+        <NavLink
+          key={index}
+          to={postData.post.id}
+        >
+             <div  className="flex items-start p-3 pb-5 px-6 pl-5 pt-4 shadow-md yapping-post">
+                        {/* Foto Profil */}
+                        <img className="w-10 h-10 image-icon rounded-full flex items-center" src={postData.user.profileImage} alt="Profile" />
 
-                {/* Gambar Post */}
-                <img 
-                    className="w-full h-max object-cover mb-2 max-h-full cursor-pointer" 
-                    src={postData.post.image} 
-                    alt="Post" 
-                    onClick={() => openPopup(postData.post.image)} 
-                />
+                        {/* Konten */}
+                        <div className="ml-4 w-full">
+                            {/* Username dan Caption */}
+                            <p className="text-lg font-semibold text-gray-200">{postData.user.username}</p>
+                            
+                            
+                            <div className='post-container'>
+                            <p className="text-gray-300 text-sm mb-2">{postData.post.caption}</p>
 
-                {/* Reaksi */}
-                <div className="reaction flex items-center text-gray-300 justify-between">
-                    <div className="like-comment flex items-center text-gray-300 mt-5 gap-5">
-                        <button className="flex items-center hover:text-red-500">
-                            <BiLike className="like-icon" />
-                            <span className="ml-1 like-content">{postData.post.likes}</span>
-                        </button>
-                        <button className="flex items-center hover:text-blue-500">
-                            <GoComment className="comment-icon" />
-                            <span className="ml-1 comment-content">{postData.post.comments}</span>
-                        </button>
-                    </div>
-                    <div className='flex gap-5'>
-                        <div className='flex items-center mt-5 '> 
-                            <IoLocationOutline className='location-icon' />
-                                <p className='date-content ml-1'>
-                                    {postData.post.location ?? '-'}
-                                </p>
+                                {/* Gambar Post */}
+                                <img 
+                                    className="w-full h-max object-cover mb-2 max-h-full cursor-pointer" 
+                                    src={postData.post.image} 
+                                    alt="Post" 
+                                    onClick={() => openPopup(postData.post.image)} 
+                                />
+                            </div>
+
+
+                            {/* Reaksi */}
+                            <div className="reaction flex items-center text-gray-300 justify-between">
+                                <div className="like-comment flex items-center text-gray-300 mt-5 gap-5">
+                                    <button 
+                                               onClick={(e) => {
+                                                e.stopPropagation();
+                                                e.preventDefault(); 
+                                              }}
+                                            className="flex items-center hover:text-red-500">
+                                        <BiLike className="like-icon" />
+                                        <span className="ml-1 like-content">{postData.post.likes}</span>
+                                    </button>
+                                    <button 
+                                        onClick={(e) => {
+                                        e.stopPropagation();
+                                        e.preventDefault(); // Tambahkan ini untuk memastikan tidak terjadi navigasi
+                                        }}
+                                    
+                                    className="flex items-center hover:text-blue-500">
+                                        <GoComment className="comment-icon" />
+                                        <span className="ml-1 comment-content">{postData.post.comments}</span>
+                                    </button>
+                                </div>
+                                <div className='flex gap-5'>
+                                    <div className='flex items-center mt-5 '> 
+                                        <IoLocationOutline className='location-icon' />
+                                            <p className='date-content ml-1'>
+                                                {postData.post.location ?? '-'}
+                                            </p>
+                                    </div>
+
+                                    <div className='flex items-center mt-5 '>📅 
+                                        <p className='date-content ml-1'>
+                                            {postData.post.created_at}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-
-                        <div className='flex items-center mt-5 '>📅 
-                            <p className='date-content ml-1'>
-                                {postData.post.created_at}
-                            </p>
-                        </div>
                     </div>
-                </div>
-            </div>
-        </div>
+        </NavLink>
+
+
+ 
     ));
 
     return (

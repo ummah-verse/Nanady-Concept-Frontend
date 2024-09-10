@@ -28,17 +28,17 @@ const Profile = () => {
         >
           Mini
         </NavLink>
-        <NavLink
+        {/* <NavLink
           to="/profile/diary"
           className={({ isActive }) =>
             `p-4 transition-colors duration-300 ease-in-out ${isActive ? 'border-b-2 border-white' : 'text-white hover:bg-neutral-700'} w-full text-center`
           }
         >
           Diary
-        </NavLink>
+        </NavLink> */}
       </nav>
       <div className="content">
-        <Outlet /> {/* Komponen nested akan dirender di sini */}
+        <Outlet />
       </div>
     </div>
   );

@@ -6,7 +6,10 @@
 .content-container {
     min-height: 500px;
     width: 40vw;
+    border: 0.1rem solid rgb(255, 255, 255, 0.2);
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.363);
 }
+
 
 /* Media query untuk semua jenis handphone dalam orientasi portrait */
 @media only screen and (max-width: 768px) and (orientation: portrait) {

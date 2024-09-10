@@ -2,12 +2,12 @@
     margin-top: 0.525rem;
 }
 
-.yapping-post {
+.mini-post {
     padding-bottom: 1.25rem !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.514);
 }
 
-.yapping-post:hover {
+.mini-post:hover {
     cursor: pointer;
     background-color: rgb(28, 28, 28);
 }
@@ -41,6 +41,10 @@
 
 .like-content, .date-content {
     font-size: 12px;
+}
+
+.mini-detail-container-content {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.514);
 }
 
 

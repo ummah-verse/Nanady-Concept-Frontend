@@ -7,6 +7,16 @@
     background-color: rgb(20, 20, 20);
 }
 
+.option {
+    cursor: pointer;
+   color: rgb(68, 68, 68);
+}
+
+
+.option:hover {
+    color: rgb(190, 190, 190);
+ }
+
 @media only screen and (max-width: 768px) and (orientation: portrait) {
     .photo-profile {
         width: 70px;

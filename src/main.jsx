@@ -1,11 +1,10 @@
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import App from './App';
 import Home from './pages/Home';
 import Explore from './pages/Explore';
 import Yapping from './components/Yapping';
 import Mini from './components/Mini';
-import Diary from './components/Diary';
+// import Diary from './components/Diary';
 
 import './App.css';
 import Activity from './pages/Activity';
@@ -19,21 +18,41 @@ import Climate from './components/Climate';
 import Profile from './pages/Profile';
 import UserYapping from './components/user/UserYapping';
 import MyMini from './components/user/MyMini';
-import UserDiary from './components/user/UserDiary';
+// import UserDiary from './components/user/UserDiary';
+import EditProfile from './components/user/EditProfile';
+import CreatePostLayout from './components/user/CreatePostLayout';
+// import DiaryForm from './components/user/components/DiaryForm';
+import MiniForm from './components/user/components/MiniForm';
+import YappingForm from './components/user/components/YappingForm';
+import ReminderForm from './components/user/components/ReminderForm';
+import Layout from './Layout';
+import LoginForm from './pages/Login';
+import App from './App';
+import YappingDetail from './components/YappingDetail';
+import MiniDetail from './components/MiniDetail';
+// import DiaryDetail from './components/DiaryDetail';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
   <BrowserRouter>
     <Routes>
-      <Route path="/" element={<App />}>
+      <Route path="/login" element={<App />} />
+      <Route path="/login" element={<App />}> 
+        <Route path="" element={<LoginForm />} />
+      </Route>
+
+      <Route path="/" element={<Layout/>}>
 
         <Route index element={<Navigate to="yapping" />} /> {/* Redirect / to /yapping */}
         <Route path="/" element={<Home />}> {/* Home page */}
-          <Route index element={<Navigate to="/h/yapping" />} /> {/* Redirect / to /yapping */}
+          <Route index element={<Navigate to="/yapping" />} /> {/* Redirect / to /yapping */}
           <Route path="yapping" element={<Yapping />} />
+          <Route path="yapping/:id" element={<YappingDetail />} />
           <Route path="mini" element={<Mini />} />
-          <Route path="diary" element={<Diary />} />
+          <Route path="mini/:id" element={<MiniDetail />} />
+          {/* <Route path="diary" element={<Diary />} />
+          <Route path="diary/:id" element={<DiaryDetail />} /> */}
         </Route>
 
         <Route path="explore" element={<Explore />} />
@@ -61,7 +80,18 @@ root.render(
           <Route index element={<Navigate to="yapping" />} /> 
           <Route path="yapping" element={<UserYapping />} />
           <Route path="mini" element={<MyMini />} />
-          <Route path="diary" element={<UserDiary />} />
+          {/* <Route path="diary" element={<UserDiary />} /> */}
+          <Route path="edit" element={<EditProfile />} />
+
+
+        </Route>
+
+        <Route path="/upload" element={<CreatePostLayout />}>
+          <Route index element={<Navigate to="yapping" />} /> 
+          <Route path="yapping" element={<YappingForm />} />
+          <Route path="mini" element={<MiniForm />} />
+          {/* <Route path="diary" element={<DiaryForm />} /> */}
+          <Route path="reminder" element={<ReminderForm />} />
         </Route>
 
       </Route>

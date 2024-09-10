@@ -3,6 +3,7 @@ import { BiLike } from "react-icons/bi";
 import { GoComment } from "react-icons/go";
 import { IoLocationOutline } from "react-icons/io5";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { NavLink } from 'react-router-dom';
 
 import './styles/Diary.css';
 
@@ -20,6 +21,7 @@ const Diary = () => {
                 location: "kamar"
             },
             post: {
+                id : "1",
                 diary: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium..., Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium..., Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium..., Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium..., Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium..., Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium..., Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium..., Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium..., Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.., Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium...Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium...Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium...Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium...Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium....",
                 likes: 100,
                 comments: 50,
@@ -34,6 +36,7 @@ const Diary = () => {
                 location: "rumah verril"
             },
             post: {
+                id : "2",
                 diary: "Ini adalah teks lainnya yang sangat panjang...",
                 likes: 150,
                 comments: 75,
@@ -108,7 +111,11 @@ const Diary = () => {
         const currentSlide = currentSlideIndex[index] || 0;
 
         return (
-            <div key={index} className="flex items-start p-3 pb-5 px-6 pl-5 shadow-md mt-4 diary-post">
+        <NavLink
+            key={index}
+            to={postData.post.id}
+          >
+            <div key={index} className="flex items-start p-3 pt-4 pb-5 px-6 pl-5 shadow-md diary-post">
                 <img className="w-10 h-10 image-icon rounded-full" src={postData.user.profileImage} alt="Profile" />
 
                 <div className="ml-4 flex flex-col w-full">
@@ -125,50 +132,82 @@ const Diary = () => {
                         </div>
 
                         <div className="flex justify-between mt-2">
-                            <button 
-                                className={`text-white bg-gray-600 p-2 rounded ${currentSlide === 0 ? 'opacity-50 cursor-not-allowed' : ''}`} 
-                                onClick={() => handlePrevSlide(index)}
-                                disabled={currentSlide === 0}
+                        <button
+                            className={`text-white bg-gray-600 p-2 rounded ${currentSlide === 0 ? 'opacity-50 cursor-not-allowed' : ''}`}
+                            onClick={(e) => {
+                                e.stopPropagation();  // Mencegah event bubbling
+                                e.preventDefault();    // Mencegah default action
+
+                                if (currentSlide !== 0) {
+                                handlePrevSlide(index);  // Memanggil handlePrevSlide jika slide saat ini bukan yang pertama
+                                }
+                            }}
+                            disabled={currentSlide === 0}  // Tombol dinonaktifkan jika slide saat ini adalah yang pertama
                             >
-                                <FaChevronLeft />
-                            </button>
-                            <button 
-                                className={`text-white bg-gray-600 p-2 rounded ${currentSlide === diarySlides.length - 1 ? 'opacity-50 cursor-not-allowed' : ''}`} 
-                                onClick={() => handleNextSlide(index)}
+                            <FaChevronLeft />
+                        </button>
+
+                            <button
+                                className={`text-white bg-gray-600 p-2 rounded ${currentSlide === diarySlides.length - 1 ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                onClick={(e) => {
+                                    e.stopPropagation();  // Mencegah event bubbling
+                                    e.preventDefault();    // Mencegah default action
+
+                                    if (currentSlide !== diarySlides.length - 1) {
+                                    handleNextSlide(index);  // Memanggil handleNextSlide jika slide saat ini bukan yang terakhir
+                                    }
+                                }}
                                 disabled={currentSlide === diarySlides.length - 1}
-                            >
+                                >
                                 <FaChevronRight />
                             </button>
                         </div>
                     </div>
 
-                    <div className="reactions flex gap-4 mt-4">
-                        <button className="flex items-center hover:text-red-500">
-                            <BiLike className="like-icon" />
-                            <span className="ml-1 like-content">{postData.post.likes}</span>
-                        </button>
-                        <button className="flex items-center hover:text-blue-500">
-                            <GoComment className="comment-icon" />
-                            <span className="ml-1 comment-content">{postData.post.comments}</span>
-                        </button>
+                    <div className='flex items-center justify-between'>
+                        <div className="reaction flex gap-4 mt-4">
+                            <button            
+                                onClick={(e) => {
+                                e.stopPropagation();
+                                e.preventDefault(); // Tambahkan ini untuk memastikan tidak terjadi navigasi
+                                }} className="flex items-center hover:text-red-500">
+                                <BiLike className="like-icon" />
+                                <span className="ml-1 like-content">{postData.post.likes}</span>
+                            </button>
+                            <button 
+                            
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                e.preventDefault(); // Tambahkan ini untuk memastikan tidak terjadi navigasi
+                              }}
+                              
+                              className="flex items-center hover:text-blue-500">
+                                <GoComment className="comment-icon" />
+                                <span className="ml-1 comment-content">{postData.post.comments}</span>
+                            </button>
+                        </div>
+
+                        <div className='flex gap-5 mt-3 items-center'>
+                            <p className='flex items-center'>
+                                <IoLocationOutline className='location-icon' />
+                                <span className='date-content ml-1'>
+                                    {postData.user.location ?? '-'}
+                                </span>
+                            </p>
+
+                            <p className='flex items-center'>
+                                📅 <span className='date-content ml-1'>
+                                    {postData.post.created_at}
+                                </span>
+                            </p>
+                        </div>
                     </div>
 
-                    <div className='flex gap-5 mt-5'>
-                        <p className='flex items-center'>
-                            <IoLocationOutline className='location-icon' />
-                            <span className='date-content ml-1'>
-                                {postData.user.location ?? '-'}
-                            </span>
-                        </p>
 
-                        <p className='flex items-center'>
-                            📅 <span className='date-content ml-1'>
-                                {postData.post.created_at}
-                            </span>
-                        </p>
-                    </div>
                 </div>
             </div>
+            </NavLink>
+
         );
     });
 

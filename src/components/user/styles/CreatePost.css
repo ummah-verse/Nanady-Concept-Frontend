@@ -1,0 +1,32 @@
+.content-container {
+    height: max-content;
+    min-height: 90vh;
+}
+
+
+.input-form-textarea {
+    overflow-y: auto;
+    resize: none;
+    outline: none;
+    padding-top: 0.8rem;
+    padding-bottom: 0.8rem;
+    padding-left: 0.725rem;
+    padding-right: 0.725rem;
+}
+
+.input-form-textarea::-webkit-scrollbar {
+    width: 8px; /* Lebar scrollbar */
+}
+
+.input-form-textarea::-webkit-scrollbar-track {
+    background: #1d1d1d; /* Warna track scrollbar */
+}
+
+.input-form-textarea::-webkit-scrollbar-thumb {
+    background-color: #4b4b4b; /* Warna thumb scrollbar */
+}
+
+.input-form-textarea::-webkit-scrollbar-thumb:hover {
+    cursor: pointer;
+    background-color: #9c9c9c; /* Warna thumb saat dihover */
+}
