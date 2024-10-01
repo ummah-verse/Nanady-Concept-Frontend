@@ -1,5 +1,5 @@
 import { Bar } from 'react-chartjs-2';
-import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js';
+import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, PointElement } from 'chart.js';
 
 // Registrasi komponen Chart.js
 ChartJS.register(
@@ -8,7 +8,8 @@ ChartJS.register(
     Legend,
     BarElement,
     CategoryScale,
-    LinearScale
+    LinearScale,
+    PointElement
 );
 
 // Data JSON

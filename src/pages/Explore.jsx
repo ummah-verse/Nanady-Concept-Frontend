@@ -1,36 +1,51 @@
-import { useState } from 'react';
-import './styles/Explore.css'
-
-const users = [
-  { id: 1, username: 'naufalandya', profileImage: 'https://example.com/profile1.jpg' },
-  { id: 2, username: 'fauzanwiratama', profileImage: 'https://example.com/profile2.jpg' },
-  { id: 3, username: 'verrillia', profileImage: 'https://example.com/profile3.jpg' },
-  { id: 4, username: 'ahmadsyafiq', profileImage: 'https://example.com/profile4.jpg' },
-  { id: 5, username: 'raniayuni', profileImage: 'https://example.com/profile5.jpg' },
-  { id: 6, username: 'adityamulia', profileImage: 'https://example.com/profile6.jpg' },
-  { id: 7, username: 'sitiwardani', profileImage: 'https://example.com/profile7.jpg' },
-  { id: 8, username: 'imamfathoni', profileImage: 'https://example.com/profile8.jpg' },
-  { id: 9, username: 'rizkyhamzah', profileImage: 'https://example.com/profile9.jpg' },
-  { id: 10, username: 'yolandaindra', profileImage: 'https://example.com/profile10.jpg' }
-];
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import './styles/Explore.css';
 
 const Explore = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [results, setResults] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
-  const handleSearch = (e) => {
-    const value = e.target.value;
-    setSearchTerm(value);
+  const fetchUsers = async (query) => {
+    setLoading(true);
+    setError('');
 
-    if (value.trim() !== '') {
-      const filteredUsers = users.filter(user =>
-        user.username.toLowerCase().includes(value.toLowerCase())
-      );
-      setResults(filteredUsers);
-    } else {
-      setResults([]);
+    // Retrieve the Bearer token from localStorage
+    const token = "eyJhbGciOiJIUzUxMiJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJuYXVmYWxhbmR5YSIsImV4cCI6MTcyODI1MTc2NH0.edmI0NELvaZo5pO9XxQdvGh211Ka-2nrZWEdvxobW95GcEPu5qotO28V1aP3MZ2qGjZiRogiIVhqhB2d_zJPrA";
+
+    try {
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/search-users`, {
+        params: {
+          username: query
+        },
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+
+      // Ensure data structure exists before setting results
+      const fetchedData = response?.data?.data || [];
+      setResults(fetchedData);  // Always set results to an array
+    } catch (err) {
+      setError('Failed to fetch users', err);
+    } finally {
+      setLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (searchTerm.trim() !== '') {
+      const debounceFetch = setTimeout(() => {
+        fetchUsers(searchTerm);
+      }, 500); // Add a 500ms delay to avoid too many requests
+
+      return () => clearTimeout(debounceFetch);
+    } else {
+      setResults([]);  // Clear results if search term is empty
+    }
+  }, [searchTerm]);
 
   return (
     <div className="text-white bg-neutral-900 content-container p-4">
@@ -40,20 +55,26 @@ const Explore = () => {
           className="bg-neutral-800 p-3 w-full text-white focus:ring-0 search-bar"
           placeholder="Search for a user..."
           value={searchTerm}
-          onChange={handleSearch}
+          onChange={(e) => setSearchTerm(e.target.value)}
         />
       </div>
 
       <div className="search-results mt-4 search-result">
-        {results.length > 0 ? (
+        {loading && <p className="text-center text-gray-500">Loading...</p>}
+        {error && <p className="text-center text-red-500">{error}</p>}
+        {!loading && !error && results.length > 0 ? (
           results.map(user => (
-            <div key={user.id} className="flex items-center p-4 hover:bg-neutral-800 hover:cursor-pointer transition-colors duration-300 ease-in-out">
-              <img src={user.profileImage} alt={user.username} className="w-10 h-10 rounded-full mr-4" />
+            <div key={user.username} className="flex items-center p-4 hover:bg-neutral-800 hover:cursor-pointer transition-colors duration-300 ease-in-out">
+              <img 
+                src={user.avatar_link || 'https://via.placeholder.com/150'} 
+                alt={user.username} 
+                className="w-10 h-10 rounded-full mr-4" 
+              />
               <span className="text-white">{user.username}</span>
             </div>
           ))
         ) : (
-          searchTerm && <p className="text-center text-gray-500">No users found</p>
+          searchTerm && !loading && <p className="text-center text-gray-500">No users found</p>
         )}
       </div>
     </div>

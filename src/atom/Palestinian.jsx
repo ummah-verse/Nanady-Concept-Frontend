@@ -1,17 +1,18 @@
 import { Line } from 'react-chartjs-2';
-import { Chart as ChartJS, Title, Tooltip, Legend, LineElement, CategoryScale, LinearScale } from 'chart.js';
+import { Chart as ChartJS, Title, Tooltip, Legend, LineElement, CategoryScale, LinearScale, Filler } from 'chart.js';
 
-// Registrasi komponen Chart.js
+// Register Chart.js components
 ChartJS.register(
     Title,
     Tooltip,
     Legend,
     LineElement,
     CategoryScale,
-    LinearScale
+    LinearScale,
+    Filler
 );
 
-// Data JSON
+// Data for the chart
 const data = {
     labels: [
         "Total Martyrs in Gaza Strip",
@@ -36,13 +37,14 @@ const data = {
                 40738, 16673, 11269, 676, 1049, 885, 172, 496, 152, 203, 82, 10000, 4700, 1478
             ],
             fill: true,
-            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            backgroundColor: 'rgba(69, 177, 177, 0.2)', 
             borderColor: 'rgba(75, 192, 192, 1)',
-            tension: 0.1
+            tension: 0.1 
         }
     ]
 };
 
+// Chart options
 const options = {
     responsive: true,
     plugins: {
@@ -61,8 +63,8 @@ const options = {
         x: {
             beginAtZero: true,
             ticks: {
-                autoSkip: false, // Menampilkan semua label di sumbu X
-                maxRotation: 45, // Memutar label jika diperlukan
+                autoSkip: false, // Show all X-axis labels
+                maxRotation: 45, // Rotate labels if needed
                 minRotation: 45
             }
         },
@@ -72,15 +74,19 @@ const options = {
     }
 };
 
+// Chart component
 const PalestinianGenocideChart = () => {
     return (
         <div className="chart-container p-4">
             <h2 className="text-white mb-6">Palestinian - Israel Conflict After Oct 07</h2>
             <Line data={data} options={options} />
-            <div style={ { fontSize : '14px'}} className='mt-5'>
+            <div style={{ fontSize: '14px' }} className='mt-5'>
                 <ul>
-                    <li><a href="https://www.pcbs.gov.ps/site/lang__en/1405/Default.aspx">State of Palestine
-                    Palestinian Central Bureau of Statistics</a></li>
+                    <li>
+                        <a href="https://www.pcbs.gov.ps/site/lang__en/1405/Default.aspx">
+                            State of Palestine Palestinian Central Bureau of Statistics
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>

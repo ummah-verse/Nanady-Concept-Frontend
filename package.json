@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "axios": "^1.7.7",
     "chart.js": "^4.4.4",
     "chartjs-chart-geo": "^4.3.1",
     "prop-types": "^15.8.1",

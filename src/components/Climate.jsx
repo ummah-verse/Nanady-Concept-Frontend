@@ -6,6 +6,8 @@ const Climate = () => {
       <div className="App">
         <header className="App-header">
           <Emission />
+          <hr />
+
           <LineChart />
         </header>
       </div>

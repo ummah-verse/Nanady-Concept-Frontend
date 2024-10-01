@@ -4,19 +4,19 @@ const Interaction = () => {
     const interactions = [
         {
             username: "Mark Zuckerberg",
-            profileImage: "https://ik.imagekit.io/eoeykxtr4/mark.jpg",
+            profileImage: "https://via.placeholder.com/150/CCCCCC/FFFFFF?text=Avatar",
             action: "menyukai foto anda",
             isRead: false, 
         },
         {
             username: "Elon Musk",
-            profileImage: "https://ik.imagekit.io/eoeykxtr4/elon.jpg",
+            profileImage: "https://via.placeholder.com/150/CCCCCC/FFFFFF?text=Avatar",
             action: "mengomentari postingan anda",
             isRead: true, 
         },
         {
             username: "Sundar Pichai",
-            profileImage: "https://ik.imagekit.io/eoeykxtr4/sundar.jpg",
+            profileImage: "https://via.placeholder.com/150/CCCCCC/FFFFFF?text=Avatar",
             action: "membagikan postingan anda",
             isRead: false, 
         },
