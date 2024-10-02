@@ -97,16 +97,19 @@ const LoginForm = () => {
         <button type="submit" className="w-full px-4 py-2 bg-slate-600 text-white rounded-md hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500">
           Login
         </button>
+        <div className='w-full'>
         <NavLink
                     to="/register"
                     className={({ isActive }) =>
-                      `p-3 menu-profile transition-colors duration-300 ease-in-out ${
+                      `p-3 ask-account transition-colors duration-300 ease-in-out ${
                         isActive ? 'hover:bg-neutral-700' : 'text-white hover:bg-neutral-700'
                       } w-full text-center`
                     }
                   >
                     Dont have an account?
-                  </NavLink>    
+            </NavLink> 
+        </div>
+   
       </form>
       <Toaster />
     </div>

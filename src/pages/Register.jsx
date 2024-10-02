@@ -119,7 +119,7 @@ const RegisterForm = () => {
              <NavLink
                     to="/login"
                     className={({ isActive }) =>
-                      `p-3 menu-profile transition-colors duration-300 ease-in-out ${
+                      `p-3 ask-account transition-colors duration-300 ease-in-out ${
                         isActive ? 'hover:bg-neutral-700' : 'text-white hover:bg-neutral-700'
                       } w-full text-center`
                     }
