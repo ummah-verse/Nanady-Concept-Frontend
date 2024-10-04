@@ -13,7 +13,7 @@ const Analytic = () => {
         labels: ['D-7', 'D-6', 'D-5', 'D-4', 'D-3', 'D-2', 'D-1', 'Now'],
         datasets: [
             {
-                label: 'Weekly Yapping Activity',
+                label: 'Yapping',
                 data: [0, 0, 0, 0, 0, 0, 0, 0],
                 fill: true,
                 backgroundColor: 'rgba(75,192,192,0.2)',
@@ -21,7 +21,7 @@ const Analytic = () => {
                 tension: 0.1,
             },
             {
-                label: 'Weekly Reminder Activity',
+                label: 'Reminder',
                 data: [0, 0, 0, 0, 0, 0, 0, 0],
                 fill: true,
                 backgroundColor: 'rgba(255,99,132,0.2)',
@@ -124,7 +124,7 @@ const Analytic = () => {
             
             {/* Combined Activity Chart */}
             <div className="chart-container p-4">
-                <h2 className="text-white mb-3 title-analytic">Daily Activity (Yapping and Reminders)</h2>
+                <h2 className="text-white mb-3 title-analytic">Post Activity</h2>
                 <Line data={chartData} options={options} />
             </div>
 

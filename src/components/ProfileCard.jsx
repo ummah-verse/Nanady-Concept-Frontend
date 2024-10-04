@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { SlOptions } from "react-icons/sl";
 import { NavLink, useNavigate } from 'react-router-dom';
+import { Toast } from 'flowbite-react'; // Import Toast component from Flowbite
 import './styles/ProfileCard.css';
 
 const ProfileCard = () => {
@@ -29,9 +30,14 @@ const ProfileCard = () => {
         const result = await response.json();
         if (result.status) {
           setProfileData(result.data);
+        } else {
+          // Show error notification if status is false
+          Toast.error(result.message || 'Failed to fetch profile data.');
         }
       } catch (error) {
         console.error('Error fetching profile:', error);
+        // Show error notification for catch block
+        Toast.error('Terjadi kesalahan saat mengambil data profil. Silakan coba lagi.');
       }
     };
 
@@ -61,10 +67,10 @@ const ProfileCard = () => {
         <div className="ml-6 flex-grow">
           <div className='flex items-center justify-between gap-3'>
             <div className='flex items-center gap-3'>
-              <h2 className="name text-xl font-bold text-gray-900 dark:text-white">
+              <h2 className="name text-xl font-bold text-gray-300 dark:text-white">
                 {name}
               </h2>
-              <p className="username text-gray-600 dark:text-gray-400">@{username}</p>
+              <p className="username text-gray-300 dark:text-gray-400">@{username}</p>
             </div>
             <div className="relative">
               <SlOptions
@@ -84,11 +90,11 @@ const ProfileCard = () => {
             </div>
           </div>
 
-          <p className="bio mt-5 text-gray-700 dark:text-gray-300">{bio || "No bio available"}</p>
+          <p className="bio mt-5 text-gray-300 dark:text-gray-300">{bio || "No bio available"}</p>
 
           <div>
             <div className="menu-card mt-6 flex justify-between">
-              <p className="joined-on text-sm flex items-center text-gray-500 dark:text-gray-400">
+              <p className="joined-on text-sm flex items-center text-gray-300 dark:text-gray-400">
                 Joined on {new Date(created_at).toLocaleDateString()}
               </p>
 
@@ -126,4 +132,5 @@ const ProfileCard = () => {
     </div>
   );
 };
+
 export default ProfileCard;

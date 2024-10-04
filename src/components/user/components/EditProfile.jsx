@@ -7,31 +7,31 @@ const EditProfileForm = ({ initialUsername, initialNama, initialBio }) => {
     const [name, setNama] = useState(initialNama);
     const [bio, setBio] = useState(initialBio);
     const [searchTerm, setSearchTerm] = useState('');
-    const [selectedPreferences, setSelectedPreferences] = useState({}); // Store selected preferences
+    const [selectedPreferences, setSelectedPreferences] = useState({});
     const [filteredPreferences, setFilteredPreferences] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState(null);
-    const [successMessage, setSuccessMessage] = useState('');
+    const [toastMessage, setToastMessage] = useState(null);
+    const [toastType, setToastType] = useState('');
 
     const handleAddPreference = (preference) => {
-        if (Object.keys(selectedPreferences).length < 4 && !selectedPreferences[preference]) { // Limit to 4 preferences
+        if (Object.keys(selectedPreferences).length < 4 && !selectedPreferences[preference]) {
             setSelectedPreferences((prev) => ({
                 ...prev,
-                [preference]: { total_engage: 0 }, // Set default total_engage (or modify as needed)
+                [preference]: { total_engage: 0 },
             }));
         }
     };
 
     const handleRemovePreference = (preference) => {
         const newPreferences = { ...selectedPreferences };
-        delete newPreferences[preference]; // Remove the preference
+        delete newPreferences[preference];
         setSelectedPreferences(newPreferences);
     };
 
     useEffect(() => {
         const fetchPreferences = async () => {
             if (searchTerm.trim() === '') {
-                setFilteredPreferences([]); // Clear when there's no input
+                setFilteredPreferences([]);
                 return;
             }
 
@@ -51,13 +51,12 @@ const EditProfileForm = ({ initialUsername, initialNama, initialBio }) => {
                 if (result.status) {
                     setFilteredPreferences(result.data);
                 } else {
-                    setFilteredPreferences([]); // Clear if there are no results
+                    setFilteredPreferences([]);
                 }
-                setError(null);
             } catch (err) {
                 console.log(err);
-                setError('Failed to fetch preferences.');
-                setFilteredPreferences([]);
+                setToastMessage('Failed to fetch preferences.');
+                setToastType('error');
             } finally {
                 setIsLoading(false);
             }
@@ -65,33 +64,37 @@ const EditProfileForm = ({ initialUsername, initialNama, initialBio }) => {
 
         const delayDebounceFn = setTimeout(() => {
             fetchPreferences();
-        }, 500); // Debounce to reduce API requests
+        }, 500);
 
         return () => clearTimeout(delayDebounceFn);
     }, [searchTerm]);
 
     const handleSaveChanges = async () => {
         const token = localStorage.getItem('token');
-
-        // Prepare the updatedData with only the changed preferences
-        const updatedData = {
-            username,
-            name,
-            bio,
-            preference_yappin: {}
-        };
-
-        // Only add preferences that exist in selectedPreferences
+        const updatedData = {};
+    
+        // Cek perubahan pada username, name, dan bio
+        if (username !== initialUsername) updatedData.username = username;
+        if (name !== initialNama) updatedData.name = name;
+        if (bio !== initialBio) updatedData.bio = bio;
+    
+        // Cek jika ada preferensi yang diubah
         const preferenceKeys = Object.keys(selectedPreferences);
         if (preferenceKeys.length > 0) {
+            updatedData.preference_yappin = {};
             preferenceKeys.forEach((preference, index) => {
                 updatedData.preference_yappin[`preference_tag_${index + 1}`] = preference;
                 updatedData.preference_yappin[`total_engage_${index + 1}`] = selectedPreferences[preference]?.total_engage || 0;
             });
         }
-
-        console.log(updatedData);
-
+    
+        // Jika tidak ada data yang diubah, jangan lakukan request
+        if (Object.keys(updatedData).length === 0) {
+            setToastMessage('No changes made.');
+            setToastType('info');
+            return;
+        }
+    
         try {
             const response = await fetch(`${import.meta.env.VITE_API_URL}/profile`, {
                 method: 'PUT',
@@ -101,22 +104,23 @@ const EditProfileForm = ({ initialUsername, initialNama, initialBio }) => {
                 },
                 body: JSON.stringify(updatedData)
             });
-
+    
             const result = await response.json();
-
+    
             if (result.status) {
-                setSuccessMessage('Profile updated successfully!');
-                setError(null);
+                setToastMessage('Profile updated successfully!');
+                setToastType('success');
             } else {
-                setError(result.message || 'Failed to update profile.');
-                setSuccessMessage('');
+                setToastMessage(result.message || result.error || 'Failed to update profile.');
+                setToastType('error');
             }
         } catch (err) {
             console.error(err);
-            setError('An error occurred while updating the profile.');
-            setSuccessMessage('');
+            setToastMessage('An error occurred while updating the profile.');
+            setToastType('error');
         }
     };
+    
 
     return (
         <div className="edit-profile-form p-6 max-w-lg mx-auto bg-neutral-900">
@@ -125,7 +129,7 @@ const EditProfileForm = ({ initialUsername, initialNama, initialBio }) => {
             <label className="block mb-2 font-semibold">Username</label>
             <input
                 type="text"
-                value={username}
+                placeholder={username}
                 onChange={(e) => setUsername(e.target.value)}
                 className="input-form-text bg-neutral-800 w-full p-2 mb-4"
             />
@@ -133,14 +137,14 @@ const EditProfileForm = ({ initialUsername, initialNama, initialBio }) => {
             <label className="block mb-2 font-semibold">Name</label>
             <input
                 type="text"
-                value={name}
+                placeholder={name}
                 onChange={(e) => setNama(e.target.value)}
                 className="input-form-text bg-neutral-800 w-full p-2 mb-4"
             />
 
             <label className="block mb-2 font-semibold">Bio</label>
             <textarea
-                value={bio}
+                placeholder={bio}
                 onChange={(e) => setBio(e.target.value)}
                 className="input-form-textarea bg-neutral-800 w-full p-2 mb-4"
             ></textarea>
@@ -155,12 +159,12 @@ const EditProfileForm = ({ initialUsername, initialNama, initialBio }) => {
             />
 
             {isLoading ? (
-                <p>Loading...</p>
+                <p></p>
             ) : (
                 <ul className="mb-4">
                     {filteredPreferences.map((preference) => (
                         <li
-                            key={preference.name} // Assuming `name` is the preference identifier from API
+                            key={preference.name} 
                             className="p-2 mb-2 bg-neutral-800 rounded flex justify-between items-center cursor-pointer"
                             onClick={() => handleAddPreference(preference.name)}
                         >
@@ -201,8 +205,22 @@ const EditProfileForm = ({ initialUsername, initialNama, initialBio }) => {
                 Save Changes
             </button>
 
-            {error && <p className="text-red-500 mt-4">{error}</p>}
-            {successMessage && <p className="text-green-500 mt-4">{successMessage}</p>}
+            {toastMessage && (
+                <div className="fixed bottom-5 right-5 custom-toast">
+                    <div className="bg-slate-600 text-neutral-200 p-4 rounded-lg shadow-lg flex items-center">
+                        <div className={`inline-flex h-8 w-10 shrink-0 items-center justify-center rounded-lg ${toastType === 'success' ? 'bg-green-500' : 'bg-red-500'} text-white`}>
+                            {toastType === 'success' ? '✔️' : '❌'}
+                        </div>
+                        <div className="ml-3 text-sm font-normal">
+                            {toastMessage}
+                        </div>
+                        <button onClick={() => setToastMessage(null)} className="ml-auto -mx-1.5 -my-1.5 text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 inline-flex h-8 w-8">
+                            <span className="sr-only">Close</span>
+                            ✖️
+                        </button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

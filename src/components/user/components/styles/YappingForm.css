@@ -1,0 +1,9 @@
+@media (max-width: 768px) and (orientation: portrait) {
+    .custom-toast {
+      top: 2rem;     
+      left: 50%;       /* Move the toast horizontally to the center */
+      transform: translateX(-50%);  /* Adjust it to be fully centered */
+      width: max-content;
+    }
+  }
+  

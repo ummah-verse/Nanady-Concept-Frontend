@@ -2,7 +2,7 @@ const data = [{"year":1850,"gross":4.3,"net":2.8,"abs":1.5},{"year":1851,"gross"
 
 // src/components/BarChart.js
 
-import PropTypes from 'prop-types'; 
+// import PropTypes from 'prop-types'; 
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 
@@ -76,16 +76,16 @@ const BarChart = () => {
   );
 };
 
-// Define prop types
-BarChart.propTypes = {
-  data: PropTypes.arrayOf(
-    PropTypes.shape({
-      year: PropTypes.string.isRequired,
-      gross: PropTypes.number.isRequired,
-      net: PropTypes.number.isRequired,
-      abs: PropTypes.number.isRequired,
-    })
-  ).isRequired,
-};
+// // Define prop types
+// BarChart.propTypes = {
+//   data: PropTypes.arrayOf(
+//     PropTypes.shape({
+//       year: PropTypes.string.isRequired,
+//       gross: PropTypes.number.isRequired,
+//       net: PropTypes.number.isRequired,
+//       abs: PropTypes.number.isRequired,
+//     })
+//   ).isRequired,
+// };
 
 export default BarChart;

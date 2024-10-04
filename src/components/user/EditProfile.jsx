@@ -3,16 +3,6 @@ import EditProfileForm from "./components/EditProfile";
 
 const EditProfile = () => {
   const [profileData, setProfileData] = useState(null);
-  const availablePreferences = [
-    "Computer Science",
-    "Medicine",
-    "Politic",
-    "Nature",
-    "Animal",
-    "Tips",
-    "Photography",
-    "Car",
-  ];
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -40,7 +30,7 @@ const EditProfile = () => {
   }, []);
 
   if (!profileData) {
-    return <div>Loading...</div>; // Loading state
+    return <div></div>; // Loading state
   }
 
   return (
@@ -49,7 +39,6 @@ const EditProfile = () => {
         initialUsername={profileData.username}
         initialNama={profileData.name || ""}
         initialBio={profileData.bio || ""}
-        availablePreferences={availablePreferences}
       />
     </>
   );
