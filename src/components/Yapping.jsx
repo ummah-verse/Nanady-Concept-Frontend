@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { BiLike } from "react-icons/bi";
+import { BiSolidLike } from "react-icons/bi"; // Ikon untuk like yang aktif
 import { GoComment } from "react-icons/go";
 import { IoLocationOutline } from "react-icons/io5";
 import { NavLink } from 'react-router-dom';
@@ -25,23 +26,29 @@ const Yapping = () => {
                         'Authorization': `Bearer ${token}` // Include the Bearer token
                     }
                 });
-    
+
                 const result = await response.json();
+
+                console.log(result.data)
                 
                 if (result.status) {
-                    setPostsData(result.data);
-                    console.log(result.data[0].yappin_image)
+                    // Asumsikan setiap post memiliki properti 'isLiked'
+                    const updatedPosts = result.data.map(post => ({
+                        ...post,
+                        isLiked: post.isLiked || false // Pastikan ada properti isLiked
+                    }));
+                    setPostsData(updatedPosts);
                 }
                 setLoading(false);
-            // eslint-disable-next-line no-unused-vars
             } catch (error) {
+                console.error('Error fetching posts:', error);
                 setLoading(false);
             }
         };
     
         fetchPosts();
     }, []);
-    
+
 
     const openPopup = (image) => {
         setSelectedImage(image);
@@ -64,8 +71,71 @@ const Yapping = () => {
         return () => window.removeEventListener('scroll', handleScroll);
     });
 
+    // Fungsi untuk menangani like/unlike
+    const handleLike = async (postId) => {
+        // Optimistic UI Update: langsung ubah status isLiked dan total_likes
+        setPostsData(prevPosts =>
+            prevPosts.map(post =>
+                post.id === postId
+                    ? {
+                        ...post,
+                        isLiked: !post.isLiked,
+                        total_likes: post.isLiked ? post.total_likes - 1 : post.total_likes + 1
+                    }
+                    : post
+            )
+        );
+    
+        try {
+            const token = localStorage.getItem('token');
+    
+            // Send the request to the server
+            const response = await fetch(`${import.meta.env.VITE_API_URL_SOCKET}/api/users/like`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({ yappin_id: postId })
+            });
+    
+            const result = await response.json();
+    
+            if (!result.status) {
+                // Jika server mengembalikan status false, rollback ke state semula
+                setPostsData(prevPosts =>
+                    prevPosts.map(post =>
+                        post.id === postId
+                            ? {
+                                ...post,
+                                isLiked: !post.isLiked, // Balik lagi ke status awal
+                                total_likes: post.isLiked ? post.total_likes + 1 : post.total_likes - 1 // Balik lagi ke jumlah awal
+                            }
+                            : post
+                    )
+                );
+                console.error('Failed to like/unlike the post:', result.message);
+            }
+        } catch (error) {
+            // Jika terjadi error, rollback ke state semula
+            setPostsData(prevPosts =>
+                prevPosts.map(post =>
+                    post.id === postId
+                        ? {
+                            ...post,
+                            isLiked: !post.isLiked, // Balik lagi ke status awal
+                            total_likes: post.isLiked ? post.total_likes + 1 : post.total_likes - 1 // Balik lagi ke jumlah awal
+                        }
+                        : post
+                )
+            );
+            console.error('Error in handleLike:', error);
+        }
+    };
+    
+
     const renderPosts = postsData.slice(0, visiblePosts).map((postData, index) => (
-        <NavLink key={index} to={`/yapping/${postData.id}`}>
+        <NavLink className="yapping-post" key={index}>
             <div className="flex items-start p-3 pb-5 px-6 pl-5 pt-4 shadow-md yapping-post">
                 {/* Profile Image */}
                 <img
@@ -109,13 +179,21 @@ const Yapping = () => {
                     {/* Reactions */}
                     <div className="reaction flex items-center text-gray-300 justify-between">
                         <div className="like-comment flex items-center text-gray-300 mt-5 gap-5">
-                            <button className="flex items-center hover:text-red-500">
-                                <BiLike className="like-icon" />
+                            <button 
+                                className="flex items-center hover:text-red-500" 
+                                onClick={(e) => { 
+                                    e.preventDefault(); // Mencegah navigasi NavLink
+                                    handleLike(postData.id);
+                                }}
+                            >
+                                {postData.isLiked ? <BiSolidLike className="like-icon text-red-500" /> : <BiLike className="like-icon" />}
                                 <span className="ml-1 like-content">{postData.total_likes}</span>
                             </button>
                             <button className="flex items-center hover:text-blue-500">
-                                <GoComment className="comment-icon" />
-                                <span className="ml-1 comment-content">{postData.total_comments || 0}</span>
+                                <NavLink className='flex' to={`/yapping/${postData.id}`}>
+                                    <GoComment className="comment-icon" />
+                                    <span className="ml-1 comment-content">{postData.total_comments || 0}</span>
+                                </NavLink>
                             </button>
                         </div>
                         <div className="flex gap-5">

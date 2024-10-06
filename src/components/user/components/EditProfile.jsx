@@ -94,6 +94,8 @@ const EditProfileForm = ({ initialUsername, initialNama, initialBio }) => {
             setToastType('info');
             return;
         }
+
+        console.log(updatedData)
     
         try {
             const response = await fetch(`${import.meta.env.VITE_API_URL}/profile`, {

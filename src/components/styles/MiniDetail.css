@@ -7,10 +7,10 @@
     border-bottom: 1px solid rgba(255, 255, 255, 0.514);
 }
 
-.mini-post:hover {
+/* .mini-post:hover {
     cursor: pointer;
     background-color: rgb(28, 28, 28);
-}
+} */
 
 .clicked-image{
     max-width: 70%;

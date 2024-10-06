@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useReducer } from 'react';
 import { Radar } from 'react-chartjs-2';
 import { Chart as ChartJS, Title, Tooltip, Legend, RadialLinearScale, PointElement, LineElement } from 'chart.js';
 
@@ -12,13 +12,14 @@ ChartJS.register(
     LineElement
 );
 
-const ContentPreferencesRadarChart = () => {
-    const [data, setData] = useState({
-        labels: [],
+// Initial state for the radar chart and feedback
+const initialState = {
+    data: {
+        labels: [], // Labels for preference tags
         datasets: [
             {
-                label: 'Yapping',
-                data: [],
+                label: 'Engagement Levels',
+                data: [], // Data points for engagements
                 backgroundColor: 'rgba(235, 54, 108, 0.2)',
                 borderColor: '#eb3636',
                 pointBackgroundColor: '#262627',
@@ -27,9 +28,39 @@ const ContentPreferencesRadarChart = () => {
                 pointHoverBorderColor: 'rgba(54, 162, 235, 1)',
             },
         ],
-    });
+    },
+    feedback: '', // Initial feedback message
+};
 
-    const [feedback, setFeedback] = useState(''); // State to hold the feedback
+// Reducer function to handle state updates
+const reducer = (state, action) => {
+    switch (action.type) {
+        case 'SET_DATA':
+            return {
+                ...state,
+                data: {
+                    ...state.data,
+                    labels: action.payload.labels,
+                    datasets: [
+                        {
+                            ...state.data.datasets[0],
+                            data: action.payload.chartData,
+                        },
+                    ],
+                },
+            };
+        case 'SET_FEEDBACK':
+            return {
+                ...state,
+                feedback: action.payload,
+            };
+        default:
+            return state;
+    }
+};
+
+const ContentPreferencesRadarChart = () => {
+    const [state, dispatch] = useReducer(reducer, initialState);
 
     useEffect(() => {
         const fetchPreferences = async () => {
@@ -48,9 +79,8 @@ const ContentPreferencesRadarChart = () => {
 
                 console.log(preferenceData);
 
-                // Check if preferenceData is not empty and contains feedback
-                if (preferenceData.status && preferenceData.data.length > 0) {
-                    const preference = preferenceData.data[0];
+                if (preferenceData.status && preferenceData.data) {
+                    const preference = preferenceData.data;
 
                     // Map the tag names to the chart labels
                     const labels = [
@@ -68,25 +98,29 @@ const ContentPreferencesRadarChart = () => {
                         preference.total_engage_four || 0,
                     ];
 
-                    // Use functional update to avoid dependency issues
-                    setData(prevData => ({
-                        labels: labels,
-                        datasets: [
-                            {
-                                ...prevData.datasets[0],
-                                data: chartData,
-                            },
-                        ],
-                    }));
+                    // Dispatch data and feedback to reducer
+                    dispatch({
+                        type: 'SET_DATA',
+                        payload: { labels, chartData },
+                    });
 
-                    // Set the feedback message from the response
-                    setFeedback(preferenceData.feedback);
+                    // Dispatch feedback message
+                    dispatch({
+                        type: 'SET_FEEDBACK',
+                        payload: preferenceData.feedback,
+                    });
                 } else {
-                    setFeedback('You haven\'t chosen any content preferences yet!'); // Update feedback for no preferences
+                    dispatch({
+                        type: 'SET_FEEDBACK',
+                        payload: 'You haven\'t chosen any content preferences yet!',
+                    });
                 }
             } catch (err) {
                 console.error("Error fetching preferences:", err);
-                setFeedback('An error occurred while fetching your preferences.'); // Handle error state
+                dispatch({
+                    type: 'SET_FEEDBACK',
+                    payload: 'An error occurred while fetching your preferences.',
+                });
             }
         };
 
@@ -113,7 +147,7 @@ const ContentPreferencesRadarChart = () => {
                     display: true,
                 },
                 suggestedMin: 0,
-                suggestedMax: 200,
+                suggestedMax: 200, // Customize the max based on your data range
                 backgroundColor: 'rgba(94, 94, 94, 0.2)',
                 grid: {
                     color: 'rgba(255, 255, 255, 0.1)',
@@ -132,9 +166,9 @@ const ContentPreferencesRadarChart = () => {
     return (
         <>
             <div className="chart-container flex justify-center" style={{ width: '100%', height: '400px' }}>
-                <Radar data={data} options={options} />
+                <Radar data={state.data} options={options} />
             </div>
-            <p style={ { fontSize : "14px"}} className="mt-4">{feedback}</p> {/* Display the feedback */}
+            <p style={{ fontSize: '14px' }} className="mt-4">{state.feedback}</p> {/* Display the feedback */}
         </>
     );
 };

@@ -49,6 +49,7 @@ const LoginForm = () => {
       setToastMessage('Login Success!');
       setToastType('success'); // Toast untuk success
       localStorage.setItem('token', data.data.token);
+      localStorage.setItem('id', data.data.id);
 
       setTimeout(() => {
         navigate('/');

@@ -3,13 +3,9 @@
 }
 
 .yapping-post {
+    cursor:default;
     padding-bottom: 1.25rem !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.514);
-}
-
-.yapping-post:hover {
-    cursor: pointer;
-    background-color: rgb(28, 28, 28);
 }
 
 .clicked-image{
@@ -42,8 +38,6 @@
 .like-content, .date-content {
     font-size: 12px;
 }
-
-
 
 @media only screen and (max-width: 768px) and (orientation: portrait) {
     .reaction {
