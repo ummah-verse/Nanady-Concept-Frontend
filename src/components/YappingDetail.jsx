@@ -5,6 +5,8 @@ import { GoComment } from "react-icons/go";
 import { IoLocationOutline } from "react-icons/io5";
 import './styles/YappingDetail.css';
 
+import Comment from './user/components/Comment'; // Import Comment Component
+
 const YappingDetail = () => {
     const { id } = useParams(); // Get the Yapping post ID from the URL
     const [postData, setPostData] = useState(null);
@@ -71,7 +73,7 @@ const YappingDetail = () => {
     };
 
     if (loading) {
-        return <p>Loading...</p>;
+        return <p></p>;
     }
 
     if (!postData) {
@@ -140,6 +142,9 @@ const YappingDetail = () => {
                         </div>
                     </div>
                 </div>
+
+                {/* Comment Section */}
+                <Comment yappinId={id} />
             </div>
         </div>
     );

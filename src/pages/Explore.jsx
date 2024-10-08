@@ -13,7 +13,7 @@ const Explore = () => {
     setError('');
 
     // Retrieve the Bearer token from localStorage
-    const token = "eyJhbGciOiJIUzUxMiJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJuYXVmYWxhbmR5YSIsImV4cCI6MTcyODI1MTc2NH0.edmI0NELvaZo5pO9XxQdvGh211Ka-2nrZWEdvxobW95GcEPu5qotO28V1aP3MZ2qGjZiRogiIVhqhB2d_zJPrA";
+    const token = localStorage.getItem('token');
 
     try {
       const response = await axios.get(`${import.meta.env.VITE_API_URL}/search-users`, {
