@@ -54,7 +54,9 @@ const Comment = ({ yappinId }) => {
 
         try {
             const token = localStorage.getItem('token');
-            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/yapping/${yappinId}/comments`, {
+
+            console.log(newComment)
+            const response = await fetch(`${import.meta.env.VITE_API_URL_SOCKET}/api/yapping/${yappinId}/comments`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -95,7 +97,9 @@ const Comment = ({ yappinId }) => {
                 {comments.length > 0 ? (
                     comments.map((comment) => (
                         <div key={comment.id} className="comment-item">
-                            <p><strong>{comment.users.username}</strong>: {comment.content}</p>
+                            <p>
+                                <strong>{comment.users?.username || 'Unknown User'}</strong>: {comment.content}
+                            </p>
                         </div>
                     ))
                 ) : (

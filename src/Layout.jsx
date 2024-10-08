@@ -25,6 +25,8 @@ const Layout = () => {
 
           if (response.ok) {
             const data = await response.json();
+
+            console.log(data)
             // Check if user exists in response
             if (data.status && data.data) {
               setIsAuthenticated(true);
