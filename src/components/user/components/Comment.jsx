@@ -84,7 +84,31 @@ const Comment = ({ yappinId }) => {
     };
 
     if (loading) {
-        return <p className='text-center'>Loading comments...</p>;
+        return (
+            <div className="skeleton-wrapper">
+                <div className="skeleton-comment">
+                    <div className="skeleton-avatar"></div>
+                    <div className="skeleton-content">
+                        <div className="skeleton-line"></div>
+                        <div className="skeleton-line short"></div>
+                    </div>
+                </div>
+                <div className="skeleton-comment">
+                    <div className="skeleton-avatar"></div>
+                    <div className="skeleton-content">
+                        <div className="skeleton-line"></div>
+                        <div className="skeleton-line short"></div>
+                    </div>
+                </div>
+                <div className="skeleton-comment">
+                    <div className="skeleton-avatar"></div>
+                    <div className="skeleton-content">
+                        <div className="skeleton-line"></div>
+                        <div className="skeleton-line short"></div>
+                    </div>
+                </div>
+            </div>
+        );
     }
 
     return (

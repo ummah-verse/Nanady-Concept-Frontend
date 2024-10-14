@@ -34,7 +34,7 @@ const Interaction = () => {
         const fetchNotifications = async () => {
             try {
                 const token = localStorage.getItem('token'); 
-                const response = await fetch('https://bw2nj1xt-3001.asse.devtunnels.ms/api/notifications', {
+                const response = await fetch('http://103.196.155.16/api/notifications', {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -46,7 +46,7 @@ const Interaction = () => {
                 if (data.status) {
                     const notifications = data.data.map(notification => ({
                         username: notification.byusers.username,
-                        profileImage: 'https://via.placeholder.com/150/CCCCCC/FFFFFF?text=Avatar', 
+                        profileImage: notification.byusers.avatar_link || `/public/wakwaw.png`, 
                         action: notification.detail,
                         created_at: notification.created_at,
                         isRead: false, 

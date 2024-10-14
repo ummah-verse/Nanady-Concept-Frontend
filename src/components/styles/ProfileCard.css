@@ -16,6 +16,24 @@
 .option:hover {
     color: rgb(190, 190, 190);
  }
+ 
+ .custom-edit-avatar-button {
+    /* border-radius:  100% ; */
+    background-color: rgba(32, 32, 32, 0.384);
+    position: absolute;
+    color: rgba(252, 252, 252, 0.945); /* Warna teks */
+    -webkit-text-stroke: 1px white; /* Stroke putih dengan ketebalan 1px */
+    bottom: 0px;  /* Geser ke bawah */
+    right: 0px;   /* Geser ke kanan */
+    /* background-color: transparent; */
+    padding: 2px;
+    transition: all 0.3s ease-in-out;
+}
+
+.custom-edit-avatar-button:hover {
+    background-color: rgba(97, 97, 97, 0.384);
+}
+
 
 @media only screen and (max-width: 768px) and (orientation: portrait) {
     .photo-profile {

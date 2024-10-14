@@ -78,7 +78,7 @@ const Reminder = () => {
                         <div className="flex items-start">
                             <img
                                 className="w-10 h-10 image-icon rounded-full"
-                                src={reminderData.users?.avatar_link || 'https://via.placeholder.com/150/CCCCCC/FFFFFF?text=Avatar'}
+                                src={reminderData.users?.avatar_link || `/public/wakwaw.png`}
                                 alt="Profile"
                             />
                             <div className="ml-4">

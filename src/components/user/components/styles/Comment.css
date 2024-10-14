@@ -18,6 +18,26 @@
     border-top: 1px solid #e0e0e0;
     padding-top: 5px;
     padding-bottom: 5px;
+    scrollbar-color: #555 #1a1a1a; /* Warna scrollbar (thumb) dan track */
+    scrollbar-width: thin; /* Lebar scrollbar tipis */
+}
+
+/* Untuk browser dengan Webkit (Chrome, Safari, Edge) */
+.comments-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.comments-list::-webkit-scrollbar-track {
+    background-color: #1a1a1a; /* Warna track scrollbar */
+}
+
+.comments-list::-webkit-scrollbar-thumb {
+    background-color: #555; /* Warna scrollbar (thumb) */
+    border-radius: 10px;
+}
+
+.comments-list::-webkit-scrollbar-thumb:hover {
+    background-color: #777; /* Warna scrollbar ketika di-hover */
 }
 
 .comment-item {
@@ -54,4 +74,46 @@
 
 .comment-submit:hover {
     background-color: #303133;
+}
+
+/* Skeleton Styling */
+.skeleton-wrapper {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.skeleton-comment {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.skeleton-avatar {
+    display: none;
+    width: 40px;
+    height: 40px;
+    background-color: #535353;
+    border-radius: 50%;
+}
+
+.skeleton-content {
+    flex-grow: 1;
+}
+
+.skeleton-line {
+    height: 10px;
+    background-color: #525252;
+    margin-bottom: 5px;
+    border-radius: 5px;
+}
+
+.skeleton-line.short {
+    width: 50%;
+}
+
+.skeleton-line:not(.short) {
+    width: 100%;
 }

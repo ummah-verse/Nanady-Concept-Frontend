@@ -73,7 +73,7 @@ const UserYapping = () => {
                 {/* Profile Image */}
                 <img
                     className="w-10 h-10 image-icon rounded-full flex items-center"
-                    src={postData.users.avatar_link || 'https://via.placeholder.com/150/CCCCCC/FFFFFF?text=Avatar'} 
+                    src={postData.users.avatar_link || '/public/wakwaw.png'} 
                     alt="Profile"
                 />
                 {/* Content */}

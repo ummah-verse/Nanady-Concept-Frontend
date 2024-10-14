@@ -1,8 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Toast } from 'flowbite-react'; // Import Flowbite components
 import './styles/YappingForm.css'
+import LoadingPopup from './atom/LoadingPopup';
 
 const YappingForm = () => {
+
+  const [isLoadingSubmit, setIsLoadingSubmit] = useState(false);
+
   // State for storing form data
   const [photo, setPhoto] = useState(null);
   const [caption, setCaption] = useState('');
@@ -139,6 +143,8 @@ const YappingForm = () => {
     for (let [key, value] of formData.entries()) {
       console.log(`${key}: ${value}`);
     }
+
+    setIsLoadingSubmit(true);
   
     // Send data to API
     try {
@@ -146,6 +152,7 @@ const YappingForm = () => {
 
       const response = await fetch(`${import.meta.env.VITE_API_URL}/my-yapping`, {
         method: 'POST',
+
         body: formData,
         headers: {
           'Authorization': `Bearer ${token}`, // Include the Bearer token
@@ -163,6 +170,8 @@ const YappingForm = () => {
     } catch (error) {
       console.error('Error:', error);
       showToastNotification('An error occurred while submitting your yapping.', 'error');
+    } finally {
+        setIsLoadingSubmit(false);
     }
   };
 
@@ -272,6 +281,7 @@ const YappingForm = () => {
           Submit
         </button>
       </form>
+      <LoadingPopup isLoadingSubmit={isLoadingSubmit}/>
     </div>
   );
 };
