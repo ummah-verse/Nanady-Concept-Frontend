@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 // Define Article interface for the API response
 const NewsComponent = () => {
@@ -62,14 +63,14 @@ const NewsComponent = () => {
                         <div className="p-4">
                             <h3 className="font-semibold text-lg mb-2">{article.title}</h3>
                             <p className="text-gray-200 mb-2">{article.description || 'No description available'}</p>
-                            <a 
+                            <Link 
                                 href={article.url} 
                                 target="_blank" 
                                 rel="noopener noreferrer" 
                                 className="text-blue-600 hover:underline"
                             >
                                 Read more
-                            </a>
+                            </Link>
                             <p className="text-sm text-gray-500 mt-2">{new Date(article.publishedAt).toLocaleDateString()}</p>
                         </div>
                     </div>

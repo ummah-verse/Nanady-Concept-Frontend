@@ -31,6 +31,8 @@ import YappingDetail from './components/YappingDetail';
 import Statistic from './components/Statistic';
 import NewsComponent from './components/News';
 import RegisterForm from './pages/Register';
+import UploadProfileForm from './components/user/components/UploadProfileForm.';
+import OtherUserDetail from './pages/OtherUserDetail';
 // import Analytic
 // import MiniDetail from './components/MiniDetail';
 // import DiaryDetail from './components/DiaryDetail';
@@ -52,7 +54,10 @@ root.render(
 
       <Route path="/" element={<Layout/>}>
 
+        <Route path="/:username" element={<OtherUserDetail />} />
+
         <Route index element={<Navigate to="yapping" />} />
+
         <Route path="/" element={<Home />}> 
           <Route index element={<Navigate to="/yapping" />} /> 
           <Route path="yapping" element={<Yapping />} />
@@ -64,6 +69,7 @@ root.render(
           {/* <Route path="diary" element={<Diary />} />
           <Route path="diary/:id" element={<DiaryDetail />} /> */}
         </Route>
+
 
         <Route path="explore" element={<Explore />} />
 
@@ -88,6 +94,7 @@ root.render(
           <Route path="insight" element={<Analytic />} />
           {/* <Route path="diary" element={<UserDiary />} /> */}
           <Route path="edit" element={<EditProfile />} />
+          <Route path="avatar/edit" element={<UploadProfileForm />} />
 
 
         </Route>

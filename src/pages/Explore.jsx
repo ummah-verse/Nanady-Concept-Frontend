@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import './styles/Explore.css';
+import { Link } from 'react-router-dom';
 
 const Explore = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -63,19 +64,23 @@ const Explore = () => {
         {loading && <p className="text-center text-gray-500">Loading...</p>}
         {error && <p className="text-center text-red-500">{error}</p>}
         {!loading && !error && results.length > 0 ? (
-          results.map(user => (
-            <div key={user.username} className="flex items-center p-4 hover:bg-neutral-800 hover:cursor-pointer transition-colors duration-300 ease-in-out">
-              <img 
-                src={user.avatar_link || 'https://via.placeholder.com/150'} 
-                alt={user.username} 
-                className="w-10 h-10 rounded-full mr-4" 
-              />
-              <span className="text-white">{user.username}</span>
-            </div>
-          ))
-        ) : (
-          searchTerm && !loading && <p className="text-center text-gray-500">No users found</p>
-        )}
+        results.map(user => (
+          <Link 
+            to={`/${user.username}`} // Navigate to the user's profile page
+            key={user.username} 
+            className="flex items-center p-4 hover:bg-neutral-800 hover:cursor-pointer transition-colors duration-300 ease-in-out"
+          >
+            <img 
+              src={user.avatar_link || 'https://via.placeholder.com/150'} 
+              alt={user.username} 
+              className="w-10 h-10 rounded-full mr-4" 
+            />
+            <span className="text-white">{user.username}</span>
+          </Link>
+        ))
+      ) : (
+        searchTerm && !loading && <p className="text-center text-gray-500">No users found</p>
+      )}
       </div>
     </div>
   );

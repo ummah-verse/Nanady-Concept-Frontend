@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import io from 'socket.io-client';  
 import './styles/Interaction.css';
 
-const socket = io('https://bw2nj1xt-3001.asse.devtunnels.ms', {
+const socket = io(`${import.meta.env.VITE_API_URL_SOCKET}`, {
   transports: ['websocket'], 
   secure: true,
 });

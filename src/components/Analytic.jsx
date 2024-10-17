@@ -2,6 +2,7 @@ import { Line } from 'react-chartjs-2';
 import { Chart, registerables } from 'chart.js';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import TimeStatisticChart from './TimeStatisticChart';
 
 import './styles/Analytic.css';
 import ContentPreferencesPieChart from './../atom/Preference';
@@ -39,6 +40,7 @@ const Analytic = () => {
                 const token = localStorage.getItem('token'); // Retrieve the Bearer token from local storage
                 const response = await axios.get(`${import.meta.env.VITE_API_URL}/profile/daily-analytic`, {
                     headers: {
+
                         'Authorization': `Bearer ${token}` // Include the token in the Authorization header
                     }
                 });
@@ -137,6 +139,10 @@ const Analytic = () => {
                 <p style={{ fontSize: '14px' }}>
                     {summary.reminder}
                 </p>
+            </div>
+
+            <div className='p-4'>
+                <TimeStatisticChart/>
             </div>
         </div>
     );

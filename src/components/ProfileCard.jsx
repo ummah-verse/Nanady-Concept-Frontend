@@ -1,25 +1,24 @@
 import { useState, useEffect } from 'react';
 import { SlOptions } from "react-icons/sl";
 import { NavLink, useNavigate } from 'react-router-dom';
-import { Toast } from 'flowbite-react'; // Import Toast component from Flowbite
+import { Toast } from 'flowbite-react';
 import { MdOutlineEdit } from "react-icons/md";
 import './styles/ProfileCard.css';
 
 const ProfileCard = () => {
   const [profileData, setProfileData] = useState(null);
   const [menuVisible, setMenuVisible] = useState(false);
+  const [loading, setLoading] = useState(true); // Add loading state
   const navigate = useNavigate();
 
   const toggleMenu = () => {
     setMenuVisible(!menuVisible);
   };
 
-  // Fetch the profile data
   useEffect(() => {
     const fetchProfile = async () => {
       try {
         const token = localStorage.getItem('token');
-
         const response = await fetch(`${import.meta.env.VITE_API_URL}/profile`, {
           method: 'GET',
           headers: {
@@ -37,6 +36,8 @@ const ProfileCard = () => {
       } catch (error) {
         console.error('Error fetching profile:', error);
         Toast.error('Terjadi kesalahan saat mengambil data profil. Silakan coba lagi.');
+      } finally {
+        setLoading(false); // End loading
       }
     };
 
@@ -44,12 +45,20 @@ const ProfileCard = () => {
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem('token'); // Remove token from localStorage
-    navigate('/login'); // Redirect to login page
+    localStorage.removeItem('token');
+    navigate('/login');
   };
 
+  // If loading, render the skeleton
+  if (loading) {
+    return (
+      <div className="w-full rounded overflow-hidden shadow-lg bg-white profile-card p-6 flex flex-col relative">
+      </div>
+    );
+  }
+
   if (!profileData) {
-    return <div></div>;
+    return null;
   }
 
   const { name, username, bio, created_at, avatar_link } = profileData;
@@ -58,24 +67,19 @@ const ProfileCard = () => {
     <div className="w-full rounded overflow-hidden shadow-lg bg-white profile-card p-6 flex flex-col relative">
       <div className="flex items-center">
         <div className="relative">
-          {/* Avatar with edit button */}
           <img
             className="w-24 h-24 rounded-full photo-profile"
             src={avatar_link || `/public/wakwaw.png`}
             alt="Profile"
           />
-          
-          {/* Pencil (edit) icon positioned at bottom right of the avatar */}
           <NavLink
-          to="/profile/avatar/edit"
-          className="custom-edit-avatar-button"
-          title="Edit Avatar"
-        >
-          <MdOutlineEdit className="w-5 h-5" />
-        </NavLink>
-
+            to="/profile/avatar/edit"
+            className="custom-edit-avatar-button"
+            title="Edit Avatar"
+          >
+            <MdOutlineEdit className="w-5 h-5" />
+          </NavLink>
         </div>
-        
         <div className="ml-6 flex-grow">
           <div className='flex items-center justify-between gap-3'>
             <div className='flex items-center gap-3'>
@@ -101,44 +105,34 @@ const ProfileCard = () => {
               )}
             </div>
           </div>
-
           <p className="bio mt-5 text-gray-300 dark:text-gray-300">{bio || "No bio available"}</p>
-
-          <div>
-            <div className="menu-card mt-6 flex justify-between">
-              <p className="joined-on text-sm flex items-center text-gray-300 dark:text-gray-400">
-                Joined on {new Date(created_at).toLocaleDateString()}
-              </p>
-
-              <div className="menu-buttons gap-3 flex justify-between">
-                <button>
-                  <NavLink
-                    to="/profile/edit"
-                    className={({ isActive }) =>
-                      `p-3 menu-profile transition-colors duration-300 ease-in-out ${
-                        isActive ? 'hover:bg-neutral-700' : 'text-white hover:bg-neutral-700'
-                      } w-full text-center`
-                    }
-                  >
-                    Edit Profile
-                  </NavLink>
-                </button>
-                <button>
-                  <NavLink
-                    to="/upload"
-                    className={({ isActive }) =>
-                      `p-3 menu-profile transition-colors duration-300 ease-in-out ${
-                        isActive ? 'hover:bg-neutral-700' : 'text-white hover:bg-neutral-700'
-                      } w-full text-center`
-                    }
-                  >
-                    Create Post
-                  </NavLink>
-                </button>
-              </div>
+          <div className="menu-card mt-6 flex justify-between">
+            <p className="joined-on text-sm flex items-center text-gray-300 dark:text-gray-400">
+              Joined on {new Date(created_at).toLocaleDateString()}
+            </p>
+            <div className="menu-buttons gap-3 flex justify-between">
+              <button>
+                <NavLink
+                  to="/profile/edit"
+                  className={({ isActive }) =>
+                    `p-3 menu-profile transition-colors duration-300 ease-in-out ${isActive ? 'hover:bg-neutral-700' : 'text-white hover:bg-neutral-700'} w-full text-center`
+                  }
+                >
+                  Edit Profile
+                </NavLink>
+              </button>
+              <button>
+                <NavLink
+                  to="/upload"
+                  className={({ isActive }) =>
+                    `p-3 menu-profile transition-colors duration-300 ease-in-out ${isActive ? 'hover:bg-neutral-700' : 'text-white hover:bg-neutral-700'} w-full text-center`
+                  }
+                >
+                  Create Post
+                </NavLink>
+              </button>
             </div>
           </div>
-
         </div>
       </div>
     </div>
@@ -146,6 +140,7 @@ const ProfileCard = () => {
 };
 
 export default ProfileCard;
+
 
 
 

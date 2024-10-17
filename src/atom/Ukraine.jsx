@@ -1,5 +1,6 @@
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, PointElement } from 'chart.js';
+import { Link } from 'react-router-dom';
 
 // Registrasi komponen Chart.js
 ChartJS.register(
@@ -76,7 +77,7 @@ const UkraineBarChart = () => {
             <Bar className='mt-5' data={data} options={options} />
             <div style={ { fontSize : '14px'}} className='mt-5'>
                 <ul>
-                    <li><a href="https://www.statista.com/statistics/1293492/ukraine-war-casualties/">Statista</a></li>
+                    <li><Link href="https://www.statista.com/statistics/1293492/ukraine-war-casualties/">Statista</Link></li>
                 </ul>
             </div>
         </div>

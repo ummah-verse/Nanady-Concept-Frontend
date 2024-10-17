@@ -6,10 +6,6 @@ const Profile = () => {
   return (
     <div className='text-white bg-neutral-900 content-container'>
         <ProfileCard
-        username="johndoe"
-        nama="John Doe"
-        bio="A passionate developer who loves building amazing apps."
-        createdAt="2023-01-01"
         />
       <nav className="flex justify-center space-x-4 w-full">
         <NavLink

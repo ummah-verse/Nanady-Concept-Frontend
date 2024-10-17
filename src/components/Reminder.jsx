@@ -92,14 +92,14 @@ const Reminder = () => {
                         <p className="text-gray-300 text-sm mb-2">{reminderData.content || 'No Content Available'}</p>
 
                         <div className="reaction flex items-center text-gray-300 justify-between">
-                            <div className='flex items-center'>
-                                <p style={{ fontSize: '1rem', marginTop: '1px' }}>Status</p>
-                                <p className='pl-2'>:</p>
-                                <p style={{ fontSize: '0.9rem', marginTop: '3px' }} className='ml-3'>
+                            {/* <div className='flex items-center'>
+                                {/* <p style={{ fontSize: '1rem', marginTop: '1px' }}>Status</p>
+                                <p className='pl-2'>:</p> */}
+                                {/* <p style={{ fontSize: '0.9rem', marginTop: '3px' }} className='ml-3'>
                                     {reminderData.is_finished ? '✅ Finished' : '❌ Not Finished'}
-                                </p>
-                            </div>
-                            <div className='flex gap-5'>
+                                </p> 
+                            </div> */}
+                            <div className='flex items-center justify-between w-full'>
                                 <div className='flex items-center'>
                                     📅
                                     <p className='date-content ml-1'>

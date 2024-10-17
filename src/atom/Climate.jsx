@@ -1,6 +1,7 @@
 // LineChart.js
 import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS, Title, Tooltip, Legend, LineElement, CategoryScale, LinearScale } from 'chart.js';
+import { Link } from 'react-router-dom';
 
 ChartJS.register(Title, Tooltip, Legend, LineElement, CategoryScale, LinearScale);
 
@@ -80,7 +81,7 @@ const LineChart = () => {
       <h2>Temperature Statistic By Year</h2>
       <Line data={dataCelcius} options={options} />
       <Line data={dataFahrenheit} options={options} />
-      <p style={ { fontSize : '12px'}}><a href="https://climatechangetracker.org/">Source : Climate Change Tracker</a></p>
+      <p style={ { fontSize : '12px'}}><Link href="https://climatechangetracker.org/">Source : Climate Change Tracker</Link></p>
     </div>
   );
 };

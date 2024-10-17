@@ -28,8 +28,6 @@ const Yapping = () => {
                 });
 
                 const result = await response.json();
-
-                console.log(result.data)
                 
                 if (result.status) {
                     // Asumsikan setiap post memiliki properti 'isLiked'

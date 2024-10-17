@@ -37,6 +37,20 @@
     background-color: #9c9c9c; /* Warna thumb saat dihover */
 }
 
+input[type="file"]::file-selector-button {
+    background-color: #1d1d1d;
+    padding: 1rem;
+    margin-left: 0.2rem;
+}
+
+.submit-button-edit-avatar {
+    background-color: #284f61;
+}
+
+.submit-button-edit-avatar:hover {
+    background-color: #417791;
+}
+
 
 @media (max-width: 768px) and (orientation: portrait) {
     .custom-toast {
