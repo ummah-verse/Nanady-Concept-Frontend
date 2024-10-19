@@ -213,7 +213,7 @@ const YappingForm = () => {
 
         {/* Input Lokasi */}
         <div className="mb-4">
-          <label htmlFor="location" className="block mb-2">Lokasi:</label>
+          <label htmlFor="location" className="block mb-2">Location:</label>
           <input
             type="text"
             id="location"
@@ -228,7 +228,7 @@ const YappingForm = () => {
 
         {/* Pilihan Publik */}
         <div className="mb-4">
-          <label className="block mb-2">Publik:</label>
+          <label className="block mb-2">Public:</label>
           <select
             className="bg-neutral-800 p-2 rounded w-full focus:outline-none"
             value={isPublic}
@@ -241,7 +241,7 @@ const YappingForm = () => {
 
         {/* Tampilan Tag yang Dipilih */}
         <div className="mb-4">
-          <label className="block mb-2">Tag yang Dipilih:</label>
+          <label className="block mb-2">Selected Tags:</label>
           <div className="flex flex-wrap">
             {selectedTags.map((tag) => (
               <div key={tag.id} className="bg-blue-500 text-white rounded p-2 m-1 flex items-center">
@@ -261,7 +261,7 @@ const YappingForm = () => {
 
         {/* Pencarian dan Penambahan Tag */}
         <div className="mb-4">
-          <label className="block mb-2">Cari Tag:</label>
+          <label className="block mb-2">Search Tag:</label>
           <input
             type="text"
             className="bg-neutral-800 p-2 rounded w-full focus:outline-none"
@@ -269,7 +269,7 @@ const YappingForm = () => {
             value={tagSearch}
             onChange={(e) => setTagSearch(e.target.value)}
           />
-          {isLoading && <p className="text-gray-400">Memuat...</p>}
+          {isLoading && <p className="text-gray-400">Loading</p>}
           {!isLoading && tagResults.length > 0 && (
             <div className="mt-2 bg-neutral-700 rounded p-2 max-h-60 overflow-y-auto">
               {tagResults.map((tag) => (
@@ -295,7 +295,7 @@ const YappingForm = () => {
           className="bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded w-full"
           disabled={isLoadingSubmit}
         >
-          {isLoadingSubmit ? 'Mengirim...' : 'Kirim Yapping'}
+          {isLoadingSubmit ? 'Uploading' : 'Submit'}
         </button>
       </form>
 
