@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import './styles/Reminder.css';
 
 const Reminder = () => {
+    const darkMode = localStorage.getItem('theme') || 'light'; // Get theme from localStorage
+
     const [isOpen, setIsOpen] = useState(false);
     const [selectedImage, setSelectedImage] = useState('');
     const [visiblePosts, setVisiblePosts] = useState(6);
@@ -69,8 +71,8 @@ const Reminder = () => {
 
     // Render posts grouped by date
     const renderPosts = Object.keys(groupedData).map((date, index) => (
-        <div key={index}>
-            <h2 className="text-xl font-bold text-gray-300 p-4">{date}</h2>
+        <div className={`text-xl font-bold text-gray-300 ${darkMode === "dark" ? 'bg-neutral-800 text-gray-300' : 'bg-[#ffffff] border-neutral-950 text-gray-900 font-semibold shadow-xl border-4 mt-2 mb-2'}`} key={index}>
+            <h2 className={`text-xl font-bold p-4 ${darkMode === "dark" ? 'bg-neutral-800 text-gray-300' : 'bg-[#ffffff] border-neutral-950 text-gray-900 mb-4'}`}>{date}</h2>
 
             {groupedData[date].slice(0, visiblePosts).map((reminderData, idx) => (
                 <div key={reminderData.id} className="p-3 pb-5 px-6 pl-5 shadow-md reminder-post pt-0">
@@ -81,15 +83,17 @@ const Reminder = () => {
                                 src={reminderData.users?.avatar_link || `/public/wakwaw.png`}
                                 alt="Profile"
                             />
-                            <div className="ml-4">
-                                <p className="text-lg font-semibold text-gray-200">{reminderData.users?.username || 'Unknown User'}</p>
+                            <div className="ml-4 flex-col flex-start">
+                                <p className={`text-lg font-semibold  ${darkMode === "dark" ? 'bg-neutral-800 text-gray-300' : 'bg-[#ffffff] border-neutral-950 text-gray-900'}`}>{reminderData.users?.username || 'Unknown User'}</p>
+                                <p style={ { fontSize : '12px'}} className={`font-semibold p-0 m-0 ${darkMode === "dark" ? 'bg-neutral-800 text-gray-300' : 'bg-[#ffffff] border-neutral-950 text-gray-900'}`}>{reminderData.users?.location || 'unknown location'}</p>
+
                             </div>
                         </div>
                     )}
 
                     <div className="mt-4">
-                        <p className="text-lg font-semibold text-gray-300 mb-2">{reminderData.title || 'No Title'}</p>
-                        <p className="text-gray-300 text-sm mb-2">{reminderData.content || 'No Content Available'}</p>
+                        <p  style={ { fontSize : '14px'}} className={`font-semibold mb-2 ${darkMode === "dark" ? 'bg-neutral-800 text-gray-300' : 'bg-[#ffffff] border-neutral-950 text-gray-900'}`}>{reminderData.title || 'No Title'}</p>
+                        <p  style={ { fontSize : '14px'}} className={`font-semibold mb-2 ${darkMode === "dark" ? 'bg-neutral-800 text-gray-300' : 'bg-[#ffffff] border-neutral-950 text-gray-900'}`}>{reminderData.content || 'No Content Available'}</p>
 
                         <div className="reaction flex items-center text-gray-300 justify-between">
                             {/* <div className='flex items-center'>
@@ -102,13 +106,13 @@ const Reminder = () => {
                             <div className='flex items-center justify-between w-full'>
                                 <div className='flex items-center'>
                                     📅
-                                    <p className='date-content ml-1'>
+                                    <p style={ { fontSize : '14px'}} className={` date-content ml-1 font-semibold ${darkMode === "dark" ? 'bg-neutral-800 text-gray-300' : 'bg-[#ffffff] border-neutral-950 text-gray-900'}`}>
                                         {reminderData.deadline_date ? new Date(reminderData.deadline_date).toLocaleDateString() : 'Date Unknown'}
                                     </p>
                                 </div>
                                 <div className='flex items-center'>
                                     ⏰
-                                    <p className='date-content ml-1'>
+                                    <p style={ { fontSize : '14px'}} className={` date-content ml-1 font-semibold ${darkMode === "dark" ? 'bg-neutral-800 text-gray-300' : 'bg-[#ffffff] border-neutral-950 text-gray-900'}`}>
                                         {reminderData.deadline_date
                                             ? `${new Date(reminderData.deadline_date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`
                                             : 'Time Unknown'}

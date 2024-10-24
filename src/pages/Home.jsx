@@ -1,10 +1,10 @@
 // src/pages/Home.jsx
 import { NavLink, Outlet } from 'react-router-dom';
 import { BiStats } from "react-icons/bi";
-import { IoIosStats } from "react-icons/io";
 
 
 import './styles/Home.css';
+import { RiCalendarTodoLine } from 'react-icons/ri';
 
 
 const Home = () => {
@@ -37,8 +37,9 @@ const Home = () => {
             }`
           }
         >
-          <IoIosStats size={25} />
-        </NavLink>
+
+  <RiCalendarTodoLine size={28} />
+  </NavLink>
       </nav>
 
       <div className="content">
