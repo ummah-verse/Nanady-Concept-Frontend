@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import EditProfileForm from "./components/EditProfile";
+import { ThemeProvider } from './../../ThemeProvider';
 
 const EditProfile = () => {
   const [profileData, setProfileData] = useState(null);
@@ -11,6 +12,7 @@ const EditProfile = () => {
         
         const response = await fetch(`${import.meta.env.VITE_API_URL}/profile`, {
           method: 'GET',
+
           headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
@@ -35,11 +37,14 @@ const EditProfile = () => {
 
   return (
     <>
-      <EditProfileForm
+    <ThemeProvider>
+    <EditProfileForm
         initialUsername={profileData.username}
         initialNama={profileData.name || ""}
         initialBio={profileData.bio || ""}
       />
+    </ThemeProvider>
+
     </>
   );
 };

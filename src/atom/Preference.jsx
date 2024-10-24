@@ -60,6 +60,8 @@ const reducer = (state, action) => {
 };
 
 const ContentPreferencesRadarChart = () => {
+    const darkMode = localStorage.getItem('theme') || 'light'; // Get theme from localStorage
+
     const [state, dispatch] = useReducer(reducer, initialState);
 
     useEffect(() => {
@@ -148,16 +150,16 @@ const ContentPreferencesRadarChart = () => {
                 },
                 suggestedMin: 0,
                 suggestedMax: 200, // Customize the max based on your data range
-                backgroundColor: 'rgba(94, 94, 94, 0.2)',
+                backgroundColor: `${darkMode === 'dark' ? 'rgba(94, 94, 94, 0.2)' : '#eef85c60'}` ,
                 grid: {
-                    color: 'rgba(255, 255, 255, 0.1)',
+                    color: `${darkMode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : '#f0fffaac'}`,
                 },
                 pointLabels: {
-                    color: '#fff',
+                    color: `${darkMode === 'dark' ? '#fff' : '#030303'}`,
                 },
                 ticks: {
                     backdropColor: 'rgba(100, 100, 255, 0)',
-                    color: '#c5c5c5',
+                    color: `${darkMode === 'dark' ? '#fff' : '#444444'}`,
                 },
             },
         },

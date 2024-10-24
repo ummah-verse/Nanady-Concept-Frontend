@@ -4,6 +4,8 @@ import { Toast } from 'flowbite-react'; // Import Flowbite components
 import './styles/EditProfile.css'
 
 const UploadProfileForm = () => {
+  const darkMode = localStorage.getItem('theme') || 'light'
+
   const [file, setFile] = useState(null);
   const [isLoadingSubmit, setIsLoadingSubmit] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
@@ -60,7 +62,7 @@ const UploadProfileForm = () => {
   };
 
   return (
-    <div className="upload-photo-form w-full p-6 pt-0 bg-transparent dark:bg-neutral-800 mt-10">
+    <div className={`upload-photo-form w-full p-6  ${darkMode === "dark" ? 'bg-neutral-800 pt-0 mt-10' : 'bg-slate-300 border-neutral-950 border-4 shadow-xl'} `}>
       {/* Loading Popup */}
       <LoadingPopupPhoto isLoadingSubmit={isLoadingSubmit} />
 

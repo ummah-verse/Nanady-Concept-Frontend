@@ -174,6 +174,11 @@ import { NavLink } from 'react-router-dom';
 import './styles/UserYapping.css';
 
 const UserYapping = () => {
+
+    const darkMode = localStorage.getItem('theme') || 'light'; // Get theme from localStorage
+
+    console.log("user yapping", darkMode)
+
     const [isOpen, setIsOpen] = useState(false);
     const [selectedImage, setSelectedImage] = useState('');
     const [visiblePosts, setVisiblePosts] = useState(6);
@@ -309,9 +314,10 @@ const UserYapping = () => {
     };
     // to={`/yapping/${postData.id}`}
 
+    console.log(darkMode)
     const renderPosts = postsData.slice(0, visiblePosts).map((postData) => (
-        <NavLink className="yapping-post" key={postData.id} >
-            <div className="flex items-start p-3 pb-5 px-6 pl-5 pt-4 shadow-md yapping-post">
+        <div className={`${darkMode === "dark" ? 'bg-neutral-900  shadow-md' : ''}`} key={postData.id}>
+            <div className={`flex items-start p-3 pb-5 px-6 pl-5 pt-4 ${darkMode === "dark" ? 'bg-neutral-800 text-gray-300' : 'bg-[#ffffff] border-neutral-950 text-gray-900 font-semibold shadow-xl border-4 mb-2'}`}>
                 {/* Profile Image */}
                 <img
                     className="w-10 h-10 image-icon rounded-full flex items-center"
@@ -321,9 +327,9 @@ const UserYapping = () => {
                 {/* Content */}
                 <div className="ml-4 w-full">
                     {/* Username and Caption */}
-                    <p className="text-lg font-semibold text-gray-200">{postData.users.username}</p>
-                    <p className="text-gray-300 text-sm mb-2">{postData.caption}</p>
-
+                    <p className={`text-lg font-semibold ${darkMode === "dark" ? 'text-white' : 'text-gray-900'}`}>{postData.users.username}</p>
+                    <p className={`${darkMode === "dark" ? 'text-gray-400' : 'text-gray-900 font-semibold'} text-sm mb-2`}>{postData.caption}</p>
+    
                     {/* Post Media */}
                     {postData.yappin_image.length > 0 ? (
                         postData.yappin_image.map((media, idx) => (
@@ -350,27 +356,25 @@ const UserYapping = () => {
                     ) : (
                         <p>No images available</p>
                     )}
-
+    
                     {/* Reactions */}
-                    <div className="reaction flex items-center text-gray-300 justify-between">
-                        <div className="like-comment flex items-center text-gray-300 mt-5 gap-5">
+                    <div className="reaction flex items-center justify-between">
+                        <div className="like-comment flex items-center mt-5 gap-5">
                             <button 
-                                className="flex items-center hover:text-red-500" 
+                                className={`flex items-center ${darkMode === "dark" ? 'text-white hover:text-red-500' : 'text-gray-900 font-bold hover:text-red-500'}`}
                                 onClick={(e) => { 
-                                    e.preventDefault(); // Mencegah navigasi NavLink
+                                    e.preventDefault(); 
                                     handleLike(postData.id);
                                 }}
                             >
                                 {postData.isLiked ? <BiSolidLike className="like-icon text-red-500" /> : <BiLike className="like-icon" />}
                                 <span className="ml-1 like-content">{postData.total_likes}</span>
                             </button>
-                            <button className="flex items-center hover:text-blue-500">
+                            <button className={`flex items-center ${darkMode === "dark" ? 'text-white hover:text-blue-500' : 'text-gray-900 font-bold hover:text-blue-500'}`}>
                                 <NavLink className='flex' to={`/yapping/${postData.id}`}>
                                     <GoComment className="comment-icon" />
                                     <span className="ml-1 comment-content">{postData.total_comments || 0}</span>
                                 </NavLink>
-                                {/* <GoComment className="comment-icon" />
-                                <span className="ml-1 comment-content">{postData.total_comments || 0}</span> */}
                             </button>
                         </div>
                         <div className="flex gap-5">
@@ -389,8 +393,9 @@ const UserYapping = () => {
                     </div>
                 </div>
             </div>
-        </NavLink>
+        </div>
     ));
+    
 
     return (
         <div>

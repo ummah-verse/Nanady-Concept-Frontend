@@ -3,6 +3,10 @@ import { Toast } from 'flowbite-react'; // Import Flowbite components
 import './styles/YappingForm.css';
 import LoadingPopup from './atom/LoadingPopup'
 const YappingForm = () => {
+  const darkMode = localStorage.getItem('theme') || 'light'; // Get theme from localStorage
+
+  console.log(darkMode)
+
   const [isLoadingSubmit, setIsLoadingSubmit] = useState(false);
   const [photo, setPhoto] = useState(null);
   const [caption, setCaption] = useState('');
@@ -186,12 +190,12 @@ const YappingForm = () => {
       <form className="text-white" onSubmit={handleSubmit}>
         {/* Input Foto */}
         <div className="mb-4">
-          <label htmlFor="photo" className="block mb-2">Foto:</label>
+          <label htmlFor="photo" className={`block mb-2 ${darkMode === "dark" ?  '' : ' text-black font-semibold'}`}>Photo/Video:</label>
           <input
             type="file"
             id="photo"
             accept="image/*"
-            className="bg-neutral-800 p-4 rounded w-full focus:outline-none"
+            className={`p-4 rounded w-full focus:outline-none  ${darkMode === "dark" ? 'bg-neutral-800  ' : ' bg-slate-200 text-black'}`}
             onChange={handleFileChange}
             required
           />
@@ -199,10 +203,10 @@ const YappingForm = () => {
 
         {/* Input Caption */}
         <div className="mb-4">
-          <label htmlFor="caption" className="block mb-2">Caption:</label>
+          <label htmlFor="caption"  className={`block mb-2 ${darkMode === "dark" ?  '' : ' text-black font-semibold'}`}>Caption:</label>
           <textarea
             id="caption"
-            className="bg-neutral-800 p-2 rounded w-full focus:outline-none input-form-textarea"
+            className={`p-4 rounded w-full focus:outline-none input-form-textarea ${darkMode === "dark" ? 'bg-neutral-800 file-dark ' : 'file-light bg-slate-200 text-black'}`}
             value={caption}
             onChange={(e) => setCaption(e.target.value)}
             required
@@ -213,11 +217,11 @@ const YappingForm = () => {
 
         {/* Input Lokasi */}
         <div className="mb-4">
-          <label htmlFor="location" className="block mb-2">Location:</label>
+          <label htmlFor="location"  className={`block mb-2 ${darkMode === "dark" ?  '' : ' text-black font-semibold'}`}>Location:</label>
           <input
             type="text"
             id="location"
-            className="bg-neutral-800 p-2 rounded w-full focus:outline-none"
+            className={`p-4 rounded w-full focus:outline-none ${darkMode === "dark" ? 'bg-neutral-800 file-dark ' : 'file-light bg-slate-200 text-black'}`}
             value={location}
             onChange={(e) => setLocation(e.target.value)}
             required
@@ -228,23 +232,23 @@ const YappingForm = () => {
 
         {/* Pilihan Publik */}
         <div className="mb-4">
-          <label className="block mb-2">Public:</label>
+          <label  className={`block mb-2 ${darkMode === "dark" ?  '' : ' text-black font-semibold'}`}>Public:</label>
           <select
-            className="bg-neutral-800 p-2 rounded w-full focus:outline-none"
+            className={`p-4 rounded w-full focus:outline-none ${darkMode === "dark" ? 'bg-neutral-800 file-dark ' : 'file-light bg-slate-200 text-black'}`}
             value={isPublic}
             onChange={handlePublicChange}
           >
-            <option value="1">Ya</option>
-            <option value="0">Tidak</option>
+            <option value="1">Yes</option>
+            <option value="0">No</option>
           </select>
         </div>
 
         {/* Tampilan Tag yang Dipilih */}
         <div className="mb-4">
-          <label className="block mb-2">Selected Tags:</label>
+          <label className={`block mb-2 ${darkMode === "dark" ?  '' : ' text-black font-semibold'}`}>Selected Tags:</label>
           <div className="flex flex-wrap">
             {selectedTags.map((tag) => (
-              <div key={tag.id} className="bg-blue-500 text-white rounded p-2 m-1 flex items-center">
+              <div key={tag.id} className={`flex justify-between items-center mb-2 p-3 font-bold py-2 px-4 rounded w-full ${darkMode === "dark" ?  'bg-blue-600 hover:bg-blue-500 text-white ' : 'bg-gray-200 text-black font-semibold'}`}>
                 {tag.name}
                 <button
                   type="button"
@@ -261,19 +265,19 @@ const YappingForm = () => {
 
         {/* Pencarian dan Penambahan Tag */}
         <div className="mb-4">
-          <label className="block mb-2">Search Tag:</label>
+          <label  className={`block mb-2 ${darkMode === "dark" ?  '' : ' text-black font-semibold'}`}>Search Tag:</label>
           <input
             type="text"
-            className="bg-neutral-800 p-2 rounded w-full focus:outline-none"
-            placeholder="Cari tag..."
+            className={`block mb-2 w-full ${darkMode === "dark" ?  '' : ' text-black font-semibold'}`}
+            placeholder="Search Tags..."
             value={tagSearch}
             onChange={(e) => setTagSearch(e.target.value)}
           />
           {isLoading && <p className="text-gray-400">Loading</p>}
           {!isLoading && tagResults.length > 0 && (
-            <div className="mt-2 bg-neutral-700 rounded p-2 max-h-60 overflow-y-auto">
+            <div className="mt-2 rounded max-h-60 overflow-y-auto flex-col gap-2">
               {tagResults.map((tag) => (
-                <div key={tag.id} className="flex justify-between items-center mb-2">
+                <div key={tag.id} className={`flex justify-between items-center mb-2 p-3 ${darkMode === "dark" ?  '' : 'bg-gray-200 text-black font-semibold'}`}>
                   <span>{tag.name}</span>
                   <button
                     type="button"
@@ -292,7 +296,7 @@ const YappingForm = () => {
         {/* Tombol Submit */}
         <button
           type="submit"
-          className="bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded w-full"
+          className="bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded w-full " 
           disabled={isLoadingSubmit}
         >
           {isLoadingSubmit ? 'Uploading' : 'Submit'}

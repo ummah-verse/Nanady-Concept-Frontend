@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import './styles/Yapping.css';
 
 const YappingOther = ({ username }) => {
+    const darkMode = localStorage.getItem('theme') || 'light'; // Get theme from localStorage
     const [isOpen, setIsOpen] = useState(false);
     const [selectedImage, setSelectedImage] = useState('');
     const [visiblePosts, setVisiblePosts] = useState(6);
@@ -143,8 +144,8 @@ const YappingOther = ({ username }) => {
 
     const renderPosts = postsData.slice(0, visiblePosts).map((postData) => (
         <NavLink className="yapping-post" key={postData.id} to={`/yapping/${postData.id}`}>
-            <div className="flex items-start p-3 pb-5 px-6 pl-5 pt-4 shadow-md yapping-post">
-                {/* Profile Image */}
+            <div className={`flex items-start p-3 pb-5 px-6 pl-5 pt-4 ${darkMode === "dark" ? 'bg-neutral-800 text-gray-300' : 'bg-[#ffffff] border-neutral-950 text-gray-900 font-semibold shadow-xl border-4 mt-2 mb-2'}`}>
+            {/* Profile Image */}
                 <img
                     className="w-10 h-10 image-icon rounded-full flex items-center"
                     src={postData.users.avatar_link || `/public/wakwaw.png`} 
@@ -153,8 +154,8 @@ const YappingOther = ({ username }) => {
                 {/* Content */}
                 <div className="ml-4 w-full">
                     {/* Username and Caption */}
-                    <p className="text-lg font-semibold text-gray-200">{postData.users.username}</p>
-                    <p className="text-gray-300 text-sm mb-2">{postData.caption}</p>
+                    <p className={`${darkMode === 'dark' ? 'text-lg font-semibold text-gray-200 ' : 'text-neutral-900 font-semibold'}`} >{postData.users.username}</p>
+                    <p style={ { fontSize : '14px'}} className={`mb-2 ${darkMode === 'dark' ? 'font-semibold text-gray-200 text-sm mb-2 ' : 'text-neutral-900 font-semibold'}`}>{postData.caption}</p>
 
                     {/* Post Media */}
                     {postData.yappin_image.length > 0 ? (
@@ -193,12 +194,12 @@ const YappingOther = ({ username }) => {
                                     handleLike(postData.id);
                                 }}
                             >
-                                {postData.isLiked ? <BiSolidLike className="like-icon text-red-500" /> : <BiLike className="like-icon" />}
-                                <span className="ml-1 like-content">{postData.total_likes}</span>
+                                {postData.isLiked ? <BiSolidLike className="like-icon text-red-500" /> : <BiLike className={`like-icon ${darkMode === 'dark' ? 'text-white ' : 'text-neutral-900 font-semibold'}`} />}
+                                <span className={`ml-1 like-content ${darkMode === 'dark' ? 'text-white ' : 'text-neutral-900 font-semibold'}`}>{postData.total_likes}</span>
                             </button>
                             <button className="flex items-center hover:text-blue-500">
-                                <GoComment className="comment-icon" />
-                                <span className="ml-1 comment-content">{postData.total_comments || 0}</span>
+                                <GoComment className={`comment-icon ${darkMode === 'dark' ? 'text-white ' : 'text-neutral-900 font-semibold'}`} />
+                                <span className={`ml-1 comment-content ${darkMode === 'dark' ? 'text-white ' : 'text-neutral-900 font-semibold'}`}>{postData.total_comments || 0}</span>
                             </button>
                         </div>
                         <div className="flex gap-5">

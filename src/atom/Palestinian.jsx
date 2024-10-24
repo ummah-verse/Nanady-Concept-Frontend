@@ -76,14 +76,17 @@ const options = {
 
 // Chart component
 const PalestinianGenocideChart = () => {
+
+    const darkMode = localStorage.getItem('theme') || 'light'; // Get theme from localStorage
+
     return (
         <div className="chart-container p-4">
-            <h2 className="text-white mb-6">Palestinian - Israel Conflict After Oct 07</h2>
+            <h2 className={`mb-6 ${darkMode === 'dark' ? 'text-white ' : 'text-neutral-900 font-semibold'}`}>Palestinian - Israel Conflict After Oct 07</h2>
             <Line data={data} options={options} />
             <div style={{ fontSize: '14px' }} className='mt-5'>
                 <ul>
                     <li>
-                        <a href="https://www.pcbs.gov.ps/site/lang__en/1405/Default.aspx">
+                        <a className={`${darkMode === 'dark' ? 'text-white ' : 'text-neutral-900 font-semibold'}`} href="https://www.pcbs.gov.ps/site/lang__en/1405/Default.aspx">
                             State of Palestine Palestinian Central Bureau of Statistics
                         </a>
                     </li>

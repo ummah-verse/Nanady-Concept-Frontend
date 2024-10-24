@@ -3,6 +3,7 @@ import { SlOptions } from "react-icons/sl";
 import { NavLink, useNavigate } from 'react-router-dom';
 import { Toast } from 'flowbite-react';
 import { MdOutlineEdit } from "react-icons/md";
+
 import './styles/ProfileCard.css';
 
 const ProfileCard = () => {
@@ -10,6 +11,14 @@ const ProfileCard = () => {
   const [menuVisible, setMenuVisible] = useState(false);
   const [loading, setLoading] = useState(true); // Add loading state
   const navigate = useNavigate();
+
+  const darkMode = localStorage.getItem('theme') || 'light'; // Get theme from localStorage
+
+  console.log("dar", darkMode)
+
+  // Define classes for dark and light modes
+  const containerClass = darkMode === 'dark' ? 'bg-neutral-900 text-white' : 'bg-[#abffe355] text-black border-neutral-950 border-4 shadow-xl';
+  const textLight = darkMode === 'dark' ? '' : 'text-gray-900 font-semibold';
 
   const toggleMenu = () => {
     setMenuVisible(!menuVisible);
@@ -64,7 +73,7 @@ const ProfileCard = () => {
   const { name, username, bio, created_at, avatar_link } = profileData;
 
   return (
-    <div className="w-full rounded overflow-hidden shadow-lg bg-white profile-card p-6 flex flex-col relative">
+    <div className={`w-full rounded overflow-hidden shadow-lg profile-card p-6 flex-col relative ${containerClass}`}>
       <div className="flex items-center">
         <div className="relative">
           <img
@@ -83,10 +92,10 @@ const ProfileCard = () => {
         <div className="ml-6 flex-grow">
           <div className='flex items-center justify-between gap-3'>
             <div className='flex items-center gap-3'>
-              <h2 className="name text-xl font-bold text-gray-300 dark:text-white">
+              <h2 className="name text-xl font-bold">
                 {name}
               </h2>
-              <p className="username text-gray-300 dark:text-gray-400">@{username}</p>
+              <p className={`username ${textLight}`}>@{username}</p>
             </div>
             <div className="relative">
               <SlOptions
@@ -105,37 +114,48 @@ const ProfileCard = () => {
               )}
             </div>
           </div>
-          <p className="bio mt-5 text-gray-300 dark:text-gray-300">{bio || "No bio available"}</p>
+          <p className="bio mt-5">{bio || "No bio available"}</p>
           <div className="menu-card mt-6 flex justify-between">
-            <p className="joined-on text-sm flex items-center text-gray-300 dark:text-gray-400">
+            <p className="joined-on text-sm flex items-center">
               Joined on {new Date(created_at).toLocaleDateString()}
             </p>
             <div className="menu-buttons gap-3 flex justify-between">
-              <button>
-                <NavLink
-                  to="/profile/edit"
-                  className={({ isActive }) =>
-                    `p-3 menu-profile transition-colors duration-300 ease-in-out ${isActive ? 'hover:bg-neutral-700' : 'text-white hover:bg-neutral-700'} w-full text-center`
-                  }
-                >
-                  Edit Profile
-                </NavLink>
+              <button className="flex-grow h-12">
+              <NavLink
+              to="/profile/edit"
+              className={({ isActive }) =>
+                `h-full flex items-center justify-center transition-colors duration-300 ease-in-out w-full text-center ${
+                  isActive
+                    ? `${darkMode === 'dark' ? 'bg-neutral-700 text-white' : 'bg-[#ffe28a] text-black border-neutral-950 border-4 shadow-xl'}`
+                    : `${darkMode === 'dark' ? 'bg-neutral-900 text-white hover:bg-neutral-800' : 'bg-[#fff6c1] text-black hover:bg-[#ffdd9d] border-neutral-950 border-4 shadow-xl'}`
+                }`
+              }
+            >
+              Edit Profile
+            </NavLink>
+
               </button>
-              <button>
+              <button className="flex-grow h-12">
                 <NavLink
                   to="/upload"
                   className={({ isActive }) =>
-                    `p-3 menu-profile transition-colors duration-300 ease-in-out ${isActive ? 'hover:bg-neutral-700' : 'text-white hover:bg-neutral-700'} w-full text-center`
+                    `h-full flex items-center justify-center transition-colors duration-300 ease-in-out w-full text-center ${
+                      isActive
+                        ? `${darkMode === 'dark' ? 'bg-neutral-700 text-white' : 'bg-[#ffe28a] text-black border-neutral-950 border-4 shadow-xl'}`
+                        : `${darkMode === 'dark' ? 'bg-neutral-900 text-white hover:bg-neutral-800' : 'bg-[#fff6c1] text-black hover:bg-[#ffdd9d] border-neutral-950 border-4 shadow-xl'}`
+                    }`
                   }
                 >
                   Create Post
                 </NavLink>
               </button>
             </div>
+
           </div>
         </div>
       </div>
     </div>
+
   );
 };
 

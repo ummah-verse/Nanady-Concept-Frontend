@@ -59,9 +59,11 @@ const Water = () => {
         }
     };
     
+    const darkMode = localStorage.getItem('theme') || 'light'; // Get theme from localStorage
+
 
     return (
-        <div style={ { fontSize : '14px'}} className='p-4'>
+        <div style={ { fontSize : '14px'}}  className={`p-4 mb-6 ${darkMode === 'dark' ? 'text-white ' : 'text-neutral-900 font-semibold'}`}>
             <h2 style={ { fontSize : '16px'}} className='mb-2'>Share of Population Using Safely Managed Drinking Water Services</h2>
             <Bar data={chartData} options={options} />
             <p>

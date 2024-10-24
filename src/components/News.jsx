@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 
 // Define Article interface for the API response
 const NewsComponent = () => {
+
+    const darkMode = localStorage.getItem('theme') || 'light'; // Get theme from localStorage
+
     const [articles, setArticles] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -44,10 +47,10 @@ const NewsComponent = () => {
     if (error) return <p className="text-center text-red-500">{error}</p>;
 
     return (
-        <div className="container mx-auto px-4 py-6">
-            <div className="flex flex-col gap-4">
+            <div className={`m-0 flex justify-center items-center p-3 pb-5 px-6 pl-5 pt-4 ${darkMode === "dark" ? 'bg-neutral-800 text-gray-300' : 'bg-[#ffffff] border-neutral-950 shadow-xl border-4 mb-2'}`}>
+            <div className="flex flex-col gap-4 w-full">
                 {articles.map((article) => (
-                    <div key={article.url} className="bg-neutral-900 shadow-md overflow-hidden">
+                    <div key={article.url} className={`shadow-md w-full overflow-hidden ${darkMode === "dark" ? 'text-white bg-neutral-900' : 'bg-slate-200 text-black'}`}>
                         {article.urlToImage ? (
                             <img 
                                 src={article.urlToImage} 
@@ -60,9 +63,9 @@ const NewsComponent = () => {
                             </div>
                         )}
 
-                        <div className="p-4">
+                        <div className="w-full p-4">
                             <h3 className="font-semibold text-lg mb-2">{article.title}</h3>
-                            <p className="text-gray-200 mb-2">{article.description || 'No description available'}</p>
+                            <p className={`mb-2 ${darkMode === "dark" ? ' text-gray-200 bg-neutral-900' : 'bg-slate-200 text-black'}`}>{article.description || 'No description available'}</p>
                             <Link 
                                 href={article.url} 
                                 target="_blank" 
@@ -77,6 +80,7 @@ const NewsComponent = () => {
                 ))}
             </div>
         </div>
+
     );
 };
 

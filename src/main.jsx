@@ -6,7 +6,6 @@ import Yapping from './components/Yapping';
 // import Mini from './components/Mini';
 // import Diary from './components/Diary';
 
-import './App.css';
 import Activity from './pages/Activity';
 import Reminder from './components/Reminder';
 import Analytic from './components/Analytic';

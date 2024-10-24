@@ -4,13 +4,17 @@ import Navbar from './components/Navbar';
 import './Main.css';
 import ReminderNotification from './components/ReminderNotification';
 
+
+
 const Layout = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const navigate = useNavigate();
   const startTime = Date.now(); // Capture start time directly
+  const darkMode= localStorage.getItem('theme') || 'light'
 
   useEffect(() => {
     const token = localStorage.getItem('token');
+
 
     const checkAuth = async () => {
       if (!token) {
@@ -71,15 +75,24 @@ const Layout = () => {
     };
   }, [startTime]); // startTime is now a constant value
 
+
+
+
   if (!isAuthenticated) {
     return <div></div>; // Placeholder saat sedang memeriksa otentikasi
   }
 
   return (
-    <div className='main-content-container w-full bg-neutral-1000 dark:bg-neutral-800 min-h-screen'>
+    <div
+      className={`main-content-container w-full min-h-screen 
+        ${darkMode === 'dark' ? 'bg-neutral-950 text-white' : 'bg-gradient-radial-light text-black'}`}
+    >
+      <div style={ { position : 'fixed'}} id={`${darkMode === 'dark' ? 'stars' : 'starlight1'}`}></div>
+      <div style={ { position : 'fixed'}} id={`${darkMode === 'dark' ? 'stars2' : 'starlight2'}`}></div>
+
       <div className='flex justify-center'>
-        <Navbar />
-        <ReminderNotification/>
+      <Navbar />
+        <ReminderNotification />
       </div>
       <div className="container mx-auto flex justify-center content-outlet p-4">
         <Outlet /> {/* This will render the content based on the route */}

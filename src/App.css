@@ -9,10 +9,4 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-html, body {
-  background-color: rgb(12, 12, 12);
-}
 
-body {
-  overflow-y: scroll;
-}

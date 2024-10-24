@@ -10,6 +10,9 @@ import ContentPreferencesPieChart from './../atom/Preference';
 Chart.register(...registerables);
 
 const Analytic = () => {
+
+    const darkMode = localStorage.getItem('theme') || 'light'; // Get theme from localStorage
+
     const [chartData, setChartData] = useState({
         labels: ['D-7', 'D-6', 'D-5', 'D-4', 'D-3', 'D-2', 'D-1', 'Now'],
         datasets: [
@@ -119,29 +122,30 @@ const Analytic = () => {
     return (
         <div>
             {/* Content Preference Chart */}
-            <div className="chart-container p-4">
-                <h2 className="text-white mb-3 title-analytic">Content Preference</h2>
+            <div className={`chart-container p-4 ${darkMode === "dark" ? 'bg-neutral-800 text-gray-300' : 'bg-[#ffffff] border-neutral-950 shadow-xl border-4 mb-2'}`}>
+                <h2 className={`mb-3 title-analytic ${darkMode === "dark" ? 'text-white' : 'text-black'}`}>Content Preference</h2>
                 <ContentPreferencesPieChart />
             </div>
             
             {/* Combined Activity Chart */}
-            <div className="chart-container p-4">
-                <h2 className="text-white mb-3 title-analytic">Post Activity</h2>
+            <div className={`chart-container p-4 ${darkMode === "dark" ? 'bg-neutral-800 text-gray-300' : 'bg-[#ffffff] border-neutral-950 shadow-xl border-4 mb-2'}`}>
+                <h2 className={` mb-3 title-analytic  ${darkMode === "dark" ? 'text-white' : 'text-black'} `}>Post Activity</h2>
                 <Line data={chartData} options={options} />
+
+                <div className='p-4'>
+                    <h3 className="text-white mb-2">Summary</h3>
+                    <p style={{ fontSize: '14px' }}>
+                        {summary.yappin}
+                    </p>
+                    <p style={{ fontSize: '14px' }}>
+                        {summary.reminder}
+                    </p>
+                </div>
             </div>
 
-            {/* Summary Section */}
-            <div className='p-4'>
-                <h3 className="text-white mb-2">Summary</h3>
-                <p style={{ fontSize: '14px' }}>
-                    {summary.yappin}
-                </p>
-                <p style={{ fontSize: '14px' }}>
-                    {summary.reminder}
-                </p>
-            </div>
 
-            <div className='p-4'>
+
+            <div className={`p-4 ${darkMode === "dark" ? 'bg-neutral-800 text-gray-300' : 'bg-[#ffffff] border-neutral-950 shadow-xl border-4 mb-2'}`}>
                 <TimeStatisticChart/>
             </div>
         </div>

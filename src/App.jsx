@@ -1,14 +1,26 @@
 // src/App.jsx
 
 import './Main.css'
-import { Outlet } from 'react-router-dom';
+import { ThemeProvider } from './ThemeProvider';
+import Root from './Root';
+
+
 
 const App = () => {
+
   return (
-      <div className='main-content-container items-center login-page'>
-        <Outlet/>
-      </div>
+    <ThemeProvider>
+
+      <Root/>
+    </ThemeProvider>
+
   );
 };
 
 export default App;
+
+      {/* <div className='lol bg-custom-radial'>
+        <div id='stars'></div>
+        <div id='stars2'></div> 
+         <div id='stars3'></div>
+      </div> */}

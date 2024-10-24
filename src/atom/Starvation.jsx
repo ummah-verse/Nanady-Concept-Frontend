@@ -27,9 +27,11 @@ const options = {
 };
 
 const ProteinMalnutritionChart = () => {
+  const darkMode = localStorage.getItem('theme') || 'light'; // Get theme from localStorage
+
     return (
-      <div style={ { fontSize : '14px'}} className='p-4'>
-        <h2 style={ { fontSize : '16px'}}>Protein-Energy Malnutrition Deaths by Country</h2>
+      <div  style={ { fontSize : '14px'}} className={`p-4 mb-6 ${darkMode === 'dark' ? 'text-white ' : 'text-neutral-900 font-semibold'}`}>
+        <h2  className={`mb-6 ${darkMode === 'dark' ? 'text-white ' : 'text-neutral-900 font-semibold'}`} style={ { fontSize : '16px'}}>Protein-Energy Malnutrition Deaths by Country</h2>
         <Bar className='mt-5' data={data} options={options} />
         <p>
           This chart illustrates the number of deaths caused by protein-energy malnutrition (PEM) across different countries. PEM is a serious condition resulting from a deficiency of both protein and energy in the diet, which can lead to severe health issues and increased mortality risk.

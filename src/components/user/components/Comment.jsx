@@ -6,6 +6,9 @@ import './styles/Comment.css';
 import { IoIosSend } from "react-icons/io";
 
 const Comment = ({ yappinId }) => {
+
+    const darkMode = localStorage.getItem('theme') || 'light'; // Get theme from localStorage
+
     const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState('');
     const [loading, setLoading] = useState(true);
@@ -112,7 +115,7 @@ const Comment = ({ yappinId }) => {
     }
 
     return (
-        <div className="comment-section">
+        <div className={`comment-section `}>
             {/* Menampilkan Error Jika Ada */}
             {error && <p className="error-message">{error}</p>}
 
@@ -138,7 +141,7 @@ const Comment = ({ yappinId }) => {
                     value={newComment}
                     onChange={handleCommentInput}
                     placeholder="Add a comment..."
-                    className="comment-input"
+                    className={`comment-input ${darkMode === 'dark' ? 'text-white bg-neutral-700' : 'bg-neutral-200 text-black'}`}
                 />
                 <button type="submit" className="comment-submit"><IoIosSend size={20} /></button>
             </form>

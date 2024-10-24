@@ -2,8 +2,10 @@ import { Outlet } from 'react-router-dom';
 import './styles/Home.css';
 
 const Activity = () => {
+  const darkMode = localStorage.getItem('theme') || 'light'; // Get theme from localStorage
+
   return (
-    <div className='text-white bg-neutral-900 content-container'>
+    <div className={`content-container ${darkMode === "dark" ? 'bg-neutral-900 text-gray-300' : 'bg-[#ffffff] border-neutral-950 shadow-xl border-4 mb-2'} shadow-md`}>
       <nav className="flex justify-center space-x-4 w-full">
       {/* <NavLink
           to="/notification/interaction"

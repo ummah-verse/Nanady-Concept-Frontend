@@ -7,6 +7,8 @@ import { NavLink } from 'react-router-dom';
 import './styles/Yapping.css';
 
 const Yapping = () => {
+    const darkMode = localStorage.getItem('theme') || 'light'; // Get theme from localStorage
+
     const [isOpen, setIsOpen] = useState(false);
     const [selectedImage, setSelectedImage] = useState('');
     const [visiblePosts, setVisiblePosts] = useState(6);
@@ -134,8 +136,8 @@ const Yapping = () => {
 
     const renderPosts = postsData.slice(0, visiblePosts).map((postData, index) => (
         <NavLink className="yapping-post" key={index}>
-            <div className="flex items-start p-3 pb-5 px-6 pl-5 pt-4 shadow-md yapping-post">
-                {/* Profile Image */}
+            <div className={`flex items-start p-3 pb-5 px-6 pl-5 pt-4 ${darkMode === "dark" ? 'bg-neutral-800 text-gray-300' : 'bg-[#ffffff] border-neutral-950 text-gray-900 font-semibold shadow-xl border-4 mb-2'}`}>
+            {/* Profile Image */}
                 <img
                     className="w-10 h-10 image-icon rounded-full flex items-center"
                     src={postData.users.avatar_link || `/public/wakwaw.png`} 
@@ -144,8 +146,8 @@ const Yapping = () => {
                 {/* Content */}
                 <div className="ml-4 w-full">
                     {/* Username and Caption */}
-                    <p className="text-lg font-semibold text-gray-200">{postData.users.username}</p>
-                    <p className="text-gray-300 text-sm mb-2">{postData.caption}</p>
+                    <p className={`${darkMode === 'dark' ? 'text-lg font-semibold text-gray-200 ' : 'text-neutral-900 font-semibold'}`}                    >{postData.users.username}</p>
+                    <p  style={ { fontSize : '14px'}} className={`mb-2 ${darkMode === 'dark' ? 'font-semibold text-gray-200 text-sm mb-2 ' : 'text-neutral-900 font-semibold'}`}>{postData.caption}</p>
 
                     {/* Post Media */}
                     {postData.yappin_image.length > 0 ? (
@@ -184,24 +186,24 @@ const Yapping = () => {
                                     handleLike(postData.id);
                                 }}
                             >
-                                {postData.isLiked ? <BiSolidLike className="like-icon text-red-500" /> : <BiLike className="like-icon" />}
-                                <span className="ml-1 like-content">{postData.total_likes}</span>
+                                {postData.isLiked ? <BiSolidLike className="like-icon text-red-500" /> : <BiLike className={`like-icon ${darkMode === 'dark' ? 'text-white ' : 'text-neutral-900 font-semibold'}`}/>}
+                                <span className={`ml-1 like-content ${darkMode === 'dark' ? 'text-white ' : 'text-neutral-900 font-semibold'}`}>{postData.total_likes}</span>
                             </button>
                             <button className="flex items-center hover:text-blue-500">
                                 <NavLink className='flex' to={`/yapping/${postData.id}`}>
-                                    <GoComment className="comment-icon" />
-                                    <span className="ml-1 comment-content">{postData.total_comments || 0}</span>
+                                    <GoComment className={`comment-icon ${darkMode === 'dark' ? 'text-white ' : 'text-neutral-900 font-semibold'}`} />
+                                    <span className={`ml-1 comment-content ${darkMode === 'dark' ? 'text-white ' : 'text-neutral-900 font-semibold'}`}>{postData.total_comments || 0}</span>
                                 </NavLink>
                             </button>
                         </div>
                         <div className="flex gap-5">
-                            <div className="flex items-center mt-5">
+                            <div className={`flex items-center mt-5 ${darkMode === 'dark' ? 'text-white ' : 'text-neutral-900 font-semibold'}`}>
                                 <IoLocationOutline className="location-icon" />
                                 <p className="date-content ml-1">
                                     {postData.location ?? '-'}
                                 </p>
                             </div>
-                            <div className="flex items-center mt-5">📅
+                            <div className={`flex items-center mt-5 ${darkMode === 'dark' ? 'text-white ' : 'text-neutral-900 font-semibold'}`}>📅
                                 <p className="date-content ml-1">
                                     {new Date(postData.created_at).toLocaleDateString()}
                                 </p>

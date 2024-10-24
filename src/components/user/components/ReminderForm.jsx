@@ -4,6 +4,8 @@ import { Toast } from 'flowbite-react'; // Import Flowbite Toast
 import './styles/EditProfile.css'
 
 const ReminderForm = () => {
+  const darkMode = localStorage.getItem('theme') || 'light'; // Get theme from localStorage
+
   const [title, setTitle] = useState(''); 
   const [content, setContent] = useState('');
   const [startedDate, setStartedDate] = useState('');
@@ -89,11 +91,11 @@ const ReminderForm = () => {
 
       <form className="text-white" onSubmit={handleSubmit}>
         <div className="mb-4">
-          <label htmlFor="title" className="block mb-2">Title:</label>
+          <label htmlFor="title"  className={`block mb-2 ${darkMode === "dark" ?  '' : ' text-black font-semibold'}`}>Title:</label>
           <input 
             type="text" 
             id="title" 
-            className="bg-neutral-800 p-2 w-full focus:outline-none"
+            className={`p-4 rounded w-full focus:outline-none ${darkMode === "dark" ? 'bg-neutral-800  ' : ' bg-slate-200 text-black'}`}
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             required
@@ -101,10 +103,10 @@ const ReminderForm = () => {
         </div>
 
         <div className="mb-4">
-          <label htmlFor="content" className="block mb-2">Content:</label>
+          <label htmlFor="content" className={`block mb-2 ${darkMode === "dark" ?  '' : ' text-black font-semibold'}`}>Content:</label>
           <textarea 
             id="content" 
-            className="bg-neutral-800 p-2 w-full focus:outline-none input-form-textarea" 
+            className={`p-4 rounded w-full focus:outline-none input-form-textarea ${darkMode === "dark" ? 'bg-neutral-800 file-dark ' : 'file-light bg-slate-200 text-black'}`}
             value={content}
             onChange={(e) => setContent(e.target.value)}
             required
@@ -112,11 +114,11 @@ const ReminderForm = () => {
         </div>
 
         <div className="mb-4">
-          <label htmlFor="startedDate" className="block mb-2">Started Date:</label>
+          <label htmlFor="startedDate" className={`block mb-2 ${darkMode === "dark" ?  '' : ' text-black font-semibold'}`}>Started Date:</label>
           <input 
             type="datetime-local" 
             id="startedDate" 
-            className="bg-neutral-800 p-2 w-full focus:outline-none"
+            className={`p-4 rounded w-full focus:outline-none ${darkMode === "dark" ? 'bg-neutral-800  ' : ' bg-slate-200 text-black'}`}
             value={startedDate}
             onChange={(e) => setStartedDate(e.target.value)}
             required
@@ -124,11 +126,11 @@ const ReminderForm = () => {
         </div>
 
         <div className="mb-4">
-          <label htmlFor="deadlineDate" className="block mb-2">Deadline Date:</label>
+          <label htmlFor="deadlineDate" className={`block mb-2 ${darkMode === "dark" ?  '' : ' text-black font-semibold'}`}>Deadline Date:</label>
           <input 
             type="datetime-local" 
             id="deadlineDate" 
-            className="bg-neutral-800 p-2 w-full focus:outline-none"
+            className={`p-4 rounded w-full focus:outline-none ${darkMode === "dark" ? 'bg-neutral-800  ' : ' bg-slate-200 text-black'}`}
             value={deadlineDate}
             onChange={(e) => setDeadlineDate(e.target.value)}
             required
@@ -136,17 +138,17 @@ const ReminderForm = () => {
         </div>
 
         <div className="mb-4">
-          <label htmlFor="location" className="block mb-2">Location:</label>
+          <label htmlFor="location" className={`block mb-2 ${darkMode === "dark" ?  '' : ' text-black font-semibold'}`}>Location:</label>
           <input 
             type="text" 
             id="location" 
-            className="bg-neutral-800 p-2 w-full focus:outline-none"
+            className={`p-4 rounded w-full focus:outline-none ${darkMode === "dark" ? 'bg-neutral-800  ' : ' bg-slate-200 text-black'}`}
             required
           />
         </div>
 
         <div className="mb-4">
-          <label htmlFor="isPublic" className="block mb-2">Public:</label>
+          <label htmlFor="isPublic" className={`block mb-2 ${darkMode === "dark" ?  '' : ' text-black font-semibold'}`}>Public:</label>
           <input 
             type="checkbox" 
             id="isPublic" 
@@ -155,7 +157,8 @@ const ReminderForm = () => {
           />
         </div>
 
-        <button type="submit" className="w-full bg-slate-700 p-2 hover:bg-slate-600">Submit</button>
+        <button type="submit"           className="bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded w-full " 
+        >Submit</button>
       </form>
     </div>
   );

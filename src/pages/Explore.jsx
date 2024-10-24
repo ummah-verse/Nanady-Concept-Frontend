@@ -8,6 +8,8 @@ const Explore = () => {
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const darkMode = localStorage.getItem('theme') || 'light'; // Get theme from localStorage
+
 
   const fetchUsers = async (query) => {
     setLoading(true);
@@ -49,7 +51,7 @@ const Explore = () => {
   }, [searchTerm]);
 
   return (
-    <div className="text-white bg-neutral-900 content-container p-4">
+    <div className={`content-container p-3 pb-5 px-6 pl-5 pt-4 ${darkMode === "dark" ? 'bg-neutral-800 text-gray-300' : 'bg-[#ffffff] border-neutral-950 text-gray-900 font-semibold shadow-xl border-4 mb-2'}`}>
       <div className="flex justify-center items-center mb-4">
         <input
           type="text"
@@ -68,14 +70,15 @@ const Explore = () => {
           <Link 
             to={`/${user.username}`} // Navigate to the user's profile page
             key={user.username} 
-            className="flex items-center p-4 hover:bg-neutral-800 hover:cursor-pointer transition-colors duration-300 ease-in-out"
+            className={`flex items-center hover:cursor-pointer transition-colors p-4 duration-300 ease-in-out ${darkMode === "dark" ? 'bg-neutral-800 text-gray-300 hover:bg-neutral-800 ' : 'bg-[#f5f5f5c5] hover:bg-neutral-300 border-neutral-950 text-gray-900 font-semibold mb-2'}`}
           >
             <img 
               src={user.avatar_link || 'https://via.placeholder.com/150'} 
               alt={user.username} 
               className="w-10 h-10 rounded-full mr-4" 
             />
-            <span className="text-white">{user.username}</span>
+            <span className={` ${darkMode === "dark" ? ' text-gray-300 hover:bg-neutral-800 ' : ' border-neutral-950 text-gray-900 font-semibold mb-2'}`}
+            >{user.username}</span>
           </Link>
         ))
       ) : (

@@ -71,13 +71,17 @@ const text = {
 }
 
 const UkraineBarChart = () => {
+    
+    const darkMode = localStorage.getItem('theme') || 'light'; // Get theme from localStorage
+
     return (
+        
         <div className="chart-container p-4">
-            <h2 className="text-white">Number of civilian casualties in Ukraine during {text.description} invasion</h2>
+            <h2 className={`mb-6 ${darkMode === 'dark' ? 'text-white ' : 'text-neutral-900 font-semibold'}`}>Number of civilian casualties in Ukraine during {text.description} invasion</h2>
             <Bar className='mt-5' data={data} options={options} />
             <div style={ { fontSize : '14px'}} className='mt-5'>
                 <ul>
-                    <li><Link href="https://www.statista.com/statistics/1293492/ukraine-war-casualties/">Statista</Link></li>
+                    <li><Link className={`${darkMode === 'dark' ? 'text-white ' : 'text-neutral-900 font-semibold'}`} href="https://www.statista.com/statistics/1293492/ukraine-war-casualties/">Statista</Link></li>
                 </ul>
             </div>
         </div>

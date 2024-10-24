@@ -2,12 +2,15 @@
     width: 350px;
     min-width: 300px;
     max-width: 80vh;
-    min-height: 350px;
+    min-height: 250px;
     height: max-content;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding-top: 2.5rem;
+    padding-bottom: 1rem;
+    box-shadow: 8px 8px 12px 1px rgba(0, 0, 0, 0.3), 4px 4px 6px -1px rgba(0, 0, 0, 0.15);
 }
 
 .input-login {
@@ -17,6 +20,5 @@
 .ask-account {
     display: inline-block;
     font-size: 14px;
-    background-color: rgb(20, 20, 20);
     width: 100%;
 }

@@ -1,8 +1,16 @@
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import ThemeToggleButton from './../../../ThemeToggleButton';
 import './styles/EditProfile.css';
+import { ThemeProvider } from '../../../ThemeProvider';
 
 const EditProfileForm = ({ initialUsername, initialNama, initialBio }) => {
+
+    const darkMode = localStorage.getItem('theme') || 'light'; // Get theme from localStorage
+
+    console.log(darkMode)
+
+
     const [username, setUsername] = useState(initialUsername);
     const [name, setNama] = useState(initialNama);
     const [bio, setBio] = useState(initialBio);
@@ -12,6 +20,10 @@ const EditProfileForm = ({ initialUsername, initialNama, initialBio }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [toastMessage, setToastMessage] = useState(null);
     const [toastType, setToastType] = useState('');
+
+    const handleRefresh = () => {
+        window.location.reload();
+    };
 
     const handleAddPreference = (preference) => {
         if (Object.keys(selectedPreferences).length < 4 && !selectedPreferences[preference]) {
@@ -100,6 +112,9 @@ const EditProfileForm = ({ initialUsername, initialNama, initialBio }) => {
         try {
             const response = await fetch(`${import.meta.env.VITE_API_URL}/profile`, {
                 method: 'PUT',
+
+
+
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
@@ -125,15 +140,23 @@ const EditProfileForm = ({ initialUsername, initialNama, initialBio }) => {
     
 
     return (
-        <div className="edit-profile-form p-6 max-w-lg mx-auto bg-neutral-900">
-            <h2 className="text-2xl font-bold mb-4">Edit Profile</h2>
+        <ThemeProvider>
+        <div className={`edit-profile-form p-6 mx-auto w-full ${darkMode === "dark" ? 'bg-neutral-800 text-gray-300' : 'bg-[#ffffff] border-neutral-950 border-4 mb-2'}`}>
+
+            <div className='flex justify-between'>
+                <h2 className="text-2xl font-bold mb-4">Edit Profile</h2>
+                <div onClick={handleRefresh}>
+                    <ThemeToggleButton className={''}/>
+                </div>
+
+            </div>
 
             <label className="block mb-2 font-semibold">Username</label>
             <input
                 type="text"
                 placeholder={username}
                 onChange={(e) => setUsername(e.target.value)}
-                className="input-form-text bg-neutral-800 w-full p-2 mb-4"
+                className={`input-form-text w-full p-2 mb-4  ${darkMode === "dark" ? 'bg-neutral-800 ' : 'bg-slate-200'}`}
             />
 
             <label className="block mb-2 font-semibold">Name</label>
@@ -141,14 +164,14 @@ const EditProfileForm = ({ initialUsername, initialNama, initialBio }) => {
                 type="text"
                 placeholder={name}
                 onChange={(e) => setNama(e.target.value)}
-                className="input-form-text bg-neutral-800 w-full p-2 mb-4"
+                className={`input-form-text w-full p-2 mb-4  ${darkMode === "dark" ? 'bg-neutral-800 ' : 'bg-slate-200'}`}
             />
 
             <label className="block mb-2 font-semibold">Bio</label>
             <textarea
                 placeholder={bio}
                 onChange={(e) => setBio(e.target.value)}
-                className="input-form-textarea bg-neutral-800 w-full p-2 mb-4"
+                className={`input-form-text w-full p-2 mb-4  ${darkMode === "dark" ? 'bg-neutral-800 ' : 'bg-slate-200'}`}
             ></textarea>
 
             <label className="block mb-2 font-semibold">Search Preferences</label>
@@ -157,7 +180,7 @@ const EditProfileForm = ({ initialUsername, initialNama, initialBio }) => {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="Search and add preferences..."
-                className="input-form-text bg-neutral-800 w-full p-2 mb-4"
+                className={`input-form-text w-full p-2 mb-4  ${darkMode === "dark" ? 'bg-neutral-800 ' : 'bg-slate-200'}`}
             />
 
             {isLoading ? (
@@ -167,7 +190,7 @@ const EditProfileForm = ({ initialUsername, initialNama, initialBio }) => {
                     {filteredPreferences.map((preference) => (
                         <li
                             key={preference.name} 
-                            className="p-2 mb-2 bg-neutral-800 rounded flex justify-between items-center cursor-pointer"
+                            className={`p-2 mb-2 rounded flex justify-between items-center cursor-pointer ${darkMode === "dark" ? 'bg-neutral-800 ' : 'bg-gray-200'}`}
                             onClick={() => handleAddPreference(preference.name)}
                         >
                             {preference.name}
@@ -187,7 +210,7 @@ const EditProfileForm = ({ initialUsername, initialNama, initialBio }) => {
                 {Object.keys(selectedPreferences).map((preference) => (
                     <li
                         key={preference}
-                        className="p-2 mb-2 bg-neutral-800 rounded flex justify-between items-center"
+                        className={`p-2 mb-2 rounded flex justify-between items-center ${darkMode === "dark" ? 'bg-neutral-800 ' : 'bg-gray-200'}`}
                     >
                         {preference}
                         <button
@@ -223,7 +246,9 @@ const EditProfileForm = ({ initialUsername, initialNama, initialBio }) => {
                     </div>
                 </div>
             )}
-        </div>
+            </div>
+        </ThemeProvider>
+
     );
 };
 

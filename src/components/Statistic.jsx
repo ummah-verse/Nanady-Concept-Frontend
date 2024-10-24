@@ -5,8 +5,10 @@ import UkraineBarChart from './../atom/Ukraine';
 import Climate from './Climate';
 
 const Statistic = () => {
+    const darkMode = localStorage.getItem('theme') || 'light'; // Get theme from localStorage
+
     return (
-        <div className="App">
+        <div className={`m-0 p-3 pb-5 px-6 pl-5 pt-4 ${darkMode === "dark" ? 'bg-neutral-800 text-gray-300' : 'bg-[#ffffff] border-neutral-950 shadow-xl border-4 mb-2'}`}>
             <PalestinianGenocideChart/>
             <hr />
             <UkraineBarChart/>

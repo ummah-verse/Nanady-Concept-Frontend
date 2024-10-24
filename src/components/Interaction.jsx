@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import io from 'socket.io-client';  
 import './styles/Interaction.css';
+import { NavLink } from 'react-router-dom';
 
 const socket = io(`${import.meta.env.VITE_API_URL_SOCKET}`, {
   transports: ['websocket'], 
@@ -8,6 +9,8 @@ const socket = io(`${import.meta.env.VITE_API_URL_SOCKET}`, {
 });
 
 const formatDate = (dateString) => {
+
+
     const date = new Date(dateString);
     const now = new Date();
     const diffInSeconds = Math.floor((now - date) / 1000);
@@ -28,7 +31,10 @@ const formatDate = (dateString) => {
 };
 
 const Interaction = () => {
+    const darkMode = localStorage.getItem('theme') || 'light'
+
     const [interactions, setInteractions] = useState([]);
+    
 
     useEffect(() => {
         const fetchNotifications = async () => {
@@ -69,7 +75,7 @@ const Interaction = () => {
             setInteractions(prevInteractions => [
                 {
                     username: notification.username || 'Unknown',
-                    profileImage: 'https://via.placeholder.com/150/CCCCCC/FFFFFF?text=Avatar',
+                    profileImage: notification.avatar_link,
                     created_at: notification.created_at,
                     action: notification.message,
                     isRead: false,
@@ -97,12 +103,18 @@ const Interaction = () => {
     return (
         <div className="text-white">
             {interactions.map((interaction, index) => (
+
                 <div
                     key={index}
-                    className={`notification-row flex items-center justify-between p-2 ${
-                        interaction.isRead ? 'notification-read' : 'notification-is-not-read'
-                    }`}
+                    className={`notification-row flex items-center justify-between ${
+                        interaction.isRead
+                          ? `${darkMode === 'dark' ? 'notification-read-dark' : 'notification-read-light hover:notification-row-light'}`
+                          : `${darkMode === 'dark' ? 'notification-is-not-read-dark' : 'notification-is-not-read-light hover:bg-[#e0e0e0]'}`
+                      }`}
+                      
                 >
+
+                    <NavLink to={`/yapping/${interaction.redirect}`} className={`flex items-center justify-between w-full P-2`}>
                     <div className='flex items-center p-3'>
                         <img
                             className="w-10 h-10 rounded-full"
@@ -110,15 +122,20 @@ const Interaction = () => {
                             alt={`${interaction.username} profile`}
                         />
                         <p className="ml-4 text-gray-200">
-                            <span className="font-semibold">{interaction.username}</span> {interaction.action}
+                            <span className={`font-semibold ${darkMode === 'dark' ? 'text-white' : 'text-black'}`}>{interaction.username} &nbsp;</span>
+                            <span className={`font-semibold ${darkMode === 'dark' ? 'text-white' : 'text-neutral-600'}`}>
+                            {interaction.action}
+                            </span> 
                         </p>
                     </div>
 
                     <div className='flex justify-end text-right'>
                         <p className="ml-4 text-gray-200">
-                            <span className="font-semibold pr-2">{formatDate(interaction.created_at)}</span> 
+                            <span className={`font-semibold pr-2 ${darkMode === 'dark' ? 'text-white' : 'text-neutral-600'}`}>{formatDate(interaction.created_at)}</span> 
                         </p>
                     </div>
+                    </NavLink>
+
                 </div>
             ))}
         </div>

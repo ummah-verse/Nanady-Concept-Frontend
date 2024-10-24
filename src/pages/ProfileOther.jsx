@@ -4,6 +4,11 @@ import PropTypes from 'prop-types'; // Import PropTypes
 // import './styles/ProfileCard.css';
 
 const ProfileOther = ({ username }) => {
+  const darkMode = localStorage.getItem('theme') || 'light'; // Get theme from localStorage
+
+  const containerClass = darkMode === 'dark' ? 'bg-neutral-900 text-white' : 'text-white bg-[#abffe355] text-black border-neutral-950 border-4 shadow-xl';
+  const textLight = darkMode === 'dark' ? 'text-gray-300' : 'text-gray-900 font-semibold';
+
   const [profileData, setProfileData] = useState(null);
   const [loading, setLoading] = useState(true); // Add loading state
 
@@ -54,7 +59,7 @@ const ProfileOther = ({ username }) => {
   const { name, bio, created_at, avatar_link } = profileData;
 
   return (
-    <div className="w-full rounded overflow-hidden shadow-lg bg-white profile-card p-6 flex flex-col relative">
+    <div className={`w-full rounded overflow-hidden shadow-lg profile-card p-6 flex-col relative ${containerClass}`}>
       <div className="flex items-center">
         <img
           className="w-24 h-24 rounded-full photo-profile"
@@ -62,9 +67,14 @@ const ProfileOther = ({ username }) => {
           alt="Profile"
         />
         <div className="ml-6 flex-grow">
-          <h2 className="name text-xl font-bold text-gray-300 dark:text-white">{name}</h2>
-          <p className="bio mt-5 text-gray-300 dark:text-gray-300">{bio || "No bio available"}</p>
-          <p className="joined-on text-sm flex items-center text-gray-300 dark:text-gray-400">
+           <div className='flex items-center gap-3'>
+              <h2 className={`name text-xl font-bold ${textLight}`}>
+                {name}
+              </h2>
+              <p className={`username ${textLight}`}>@{username}</p>
+            </div>
+          <p className={`bio mt-5 ${textLight}`}>{bio || "No bio available"}</p>
+          <p className={`joined-on text-sm flex items-center ${textLight}`}>
             Joined on {new Date(created_at).toLocaleDateString()}
           </p>
         </div>

@@ -11,8 +11,11 @@ import { RiNotification2Line } from "react-icons/ri";
 import './styles/Navbar.css';
 
 const Navbar = () => {
+
+  const darkMode = localStorage.getItem('theme') || 'light'; // Get theme from localStorage
+
   return (
-    <nav className='flex justify-center items-center p-2 navbar'>
+    <nav className={`flex justify-center items-center p-2 navbar ${darkMode === 'dark'?  'bg-[#0c0c0c] w-[100vw] text-[rgba(231,231,231,0.61)]' : 'bg-[#f3f3f3d2] w-[100vw] text-[rgba(41,41,41,0.75)] border-b-4 border-black active:text-[rgba(41,41,41,0.75)] active:font-black focus:text-[rgba(41,41,41,0.75)] focus:font-black'}`}>
       <Link to="/yapping" className="mx-4 p-4  rounded transition-colors duration-300 ease-in-out">
         <GrHomeRounded size={25} className="custom-icon" />
       </Link>
