@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 // Define Article interface for the API response
 const NewsComponent = () => {
@@ -31,7 +31,9 @@ const NewsComponent = () => {
 
                 // Filter out articles with missing or removed data
                 const filteredArticles = data.articles.filter((article) => article.title && !article.title.toLowerCase().includes("removed"));
-
+                // console.log(filteredArticles.map( (lol)=> {
+                //     console.log(lol)
+                // }))
                 setArticles(filteredArticles);
             } catch (error) {
                 setError(error.message);
@@ -47,10 +49,10 @@ const NewsComponent = () => {
     if (error) return <p className="text-center text-red-500">{error}</p>;
 
     return (
-            <div className={`m-0 flex justify-center items-center p-3 pb-5 px-6 pl-5 pt-4 ${darkMode === "dark" ? 'bg-neutral-800 text-gray-300' : 'bg-[#ffffff] border-neutral-950 shadow-xl border-4 mb-2'}`}>
+        <div className={`mt-2 flex items-start p-3 pb-5 px-6 pl-5 pt-4 ${darkMode === "dark" ? 'bg-neutral-800 text-gray-300' : 'bg-[#ffffff] rounded-md border-[#11111128] text-gray-900 font-semibold border-[1px] mb-2'}`}>
             <div className="flex flex-col gap-4 w-full">
                 {articles.map((article) => (
-                    <div key={article.url} className={`shadow-md w-full overflow-hidden ${darkMode === "dark" ? 'text-white bg-neutral-900' : 'bg-slate-200 text-black'}`}>
+                    <div key={article.url} className={`shadow-md w-full overflow-hidden ${darkMode === "dark" ? 'text-white bg-neutral-900' : 'bg-neutral-100 text-black'}`}>
                         {article.urlToImage ? (
                             <img 
                                 src={article.urlToImage} 
@@ -65,15 +67,15 @@ const NewsComponent = () => {
 
                         <div className="w-full p-4">
                             <h3 className="font-semibold text-lg mb-2">{article.title}</h3>
-                            <p className={`mb-2 ${darkMode === "dark" ? ' text-gray-200 bg-neutral-900' : 'bg-slate-200 text-black'}`}>{article.description || 'No description available'}</p>
-                            <Link 
+                            <p className={`mb-2 ${darkMode === "dark" ? ' text-gray-200 bg-neutral-900' : 'bg-neutral-100 text-black'}`}>{article.description || 'No description available'}</p>
+                            <a 
                                 href={article.url} 
                                 target="_blank" 
                                 rel="noopener noreferrer" 
                                 className="text-blue-600 hover:underline"
                             >
                                 Read more
-                            </Link>
+                            </a>
                             <p className="text-sm text-gray-500 mt-2">{new Date(article.publishedAt).toLocaleDateString()}</p>
                         </div>
                     </div>

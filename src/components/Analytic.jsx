@@ -122,13 +122,15 @@ const Analytic = () => {
     return (
         <div>
             {/* Content Preference Chart */}
-            <div className={`chart-container p-4 ${darkMode === "dark" ? 'bg-neutral-800 text-gray-300' : 'bg-[#ffffff] border-neutral-950 shadow-xl border-4 mb-2'}`}>
+            {/* <div className={`chart-container p-4 ${darkMode === "dark" ? 'bg-neutral-800 text-gray-300' : 'bg-[#ffffff] border-neutral-950 shadow-xl border-4 mb-2'}`}> */}
+            <div className={`chart-container p-4 ${darkMode === "dark" ? 'bg-neutral-800 text-gray-300' : 'bg-[#ffffff] rounded-md border-[#11111128] text-gray-900 font-semibold border-[1px] mb-2'}`}>
+
                 <h2 className={`mb-3 title-analytic ${darkMode === "dark" ? 'text-white' : 'text-black'}`}>Content Preference</h2>
                 <ContentPreferencesPieChart />
             </div>
             
             {/* Combined Activity Chart */}
-            <div className={`chart-container p-4 ${darkMode === "dark" ? 'bg-neutral-800 text-gray-300' : 'bg-[#ffffff] border-neutral-950 shadow-xl border-4 mb-2'}`}>
+            <div className={`chart-container p-4 ${darkMode === "dark" ? 'bg-neutral-800 text-gray-300' : 'bg-[#ffffff] rounded-md border-[#11111128] text-gray-900 font-semibold border-[1px] mb-2'}`}>
                 <h2 className={` mb-3 title-analytic  ${darkMode === "dark" ? 'text-white' : 'text-black'} `}>Post Activity</h2>
                 <Line data={chartData} options={options} />
 
@@ -145,7 +147,7 @@ const Analytic = () => {
 
 
 
-            <div className={`p-4 ${darkMode === "dark" ? 'bg-neutral-800 text-gray-300' : 'bg-[#ffffff] border-neutral-950 shadow-xl border-4 mb-2'}`}>
+            <div className={`chart-container p-4 ${darkMode === "dark" ? 'bg-neutral-800 text-gray-300' : 'bg-[#ffffff] rounded-md border-[#11111128] text-gray-900 font-semibold border-[1px] mb-2'}`}>
                 <TimeStatisticChart/>
             </div>
         </div>

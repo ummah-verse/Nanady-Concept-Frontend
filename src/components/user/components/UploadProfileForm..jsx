@@ -62,7 +62,9 @@ const UploadProfileForm = () => {
   };
 
   return (
-    <div className={`upload-photo-form w-full p-6  ${darkMode === "dark" ? 'bg-neutral-800 pt-0 mt-10' : 'bg-slate-300 border-neutral-950 border-4 shadow-xl'} `}>
+    // <div className={`upload-photo-form w-full p-6  ${darkMode === "dark" ? 'bg-neutral-800 pt-0 mt-10' : 'bg-slate-300 border-neutral-950 border-4 shadow-xl'} `}>
+              <div className={`upload-photo-form w-full p-6 ${darkMode === "dark" ? 'bg-neutral-800 text-gray-300' : 'bg-[#ffffff] rounded-md border-[#11111128] text-gray-900 font-semibold border-[1px] mb-2'}`}>
+
       {/* Loading Popup */}
       <LoadingPopupPhoto isLoadingSubmit={isLoadingSubmit} />
 
@@ -77,13 +79,15 @@ const UploadProfileForm = () => {
               type="file"
               accept="image/*"
               onChange={handleFileChange}
-              className="p-4 text-white bg-neutral-800 dark:bg-neutral-700 focus:outline-none w-full"
+              
+              className={`p-4 text-white focus:outline-none w-full ${darkMode === "dark" ? 'bg-neutral-800 text-gray-300' : 'bg-[#ffffff] rounded-md border-[#11111128] text-gray-900 font-semibold border-[1px] mb-2'}`}
             />
           </div>
         </div>
         <button
           type="submit"
-          className="w-full py-2 px-4 bg-neutral-700 text-white font-medium submit-button-edit-avatar"
+          className={`p-4 text-white focus:outline-none w-full font-medium submit-button-edit-avatar ${darkMode === "dark" ? 'bg-neutral-800 text-gray-300' : 'bg-[#559eff] rounded-md border-[#11111128] text-gray-900 font-semibold border-[1px] mb-2'}`}
+
           disabled={isLoadingSubmit} // Disable button while loading
         >
           {isLoadingSubmit ? 'Uploading...' : 'Upload'}

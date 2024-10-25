@@ -17,7 +17,7 @@ const ProfileCard = () => {
   console.log("dar", darkMode)
 
   // Define classes for dark and light modes
-  const containerClass = darkMode === 'dark' ? 'bg-neutral-900 text-white' : 'bg-[#ebfff8] text-black border-neutral-950 border-4 shadow-xl';
+  // const containerClass = darkMode === 'dark' ? 'bg-neutral-900 text-white' : 'bg-[#ebfff8] text-black border-neutral-950 border-4 shadow-xl';
   const textLight = darkMode === 'dark' ? '' : 'text-gray-900 font-semibold';
 
   const toggleMenu = () => {
@@ -73,88 +73,87 @@ const ProfileCard = () => {
   const { name, username, bio, created_at, avatar_link } = profileData;
 
   return (
-    <div className={`w-full rounded overflow-hidden shadow-lg profile-card p-6 flex-col relative ${containerClass}`}>
-      <div className="flex items-center">
-        <div className="relative">
-          <img
-            className="w-24 h-24 rounded-full photo-profile"
-            src={avatar_link || `/public/wakwaw.png`}
-            alt="Profile"
-          />
-          <NavLink
-            to="/profile/avatar/edit"
-            className="custom-edit-avatar-button"
-            title="Edit Avatar"
-          >
-            <MdOutlineEdit className="w-5 h-5" />
-          </NavLink>
+    // <div className={`w-full rounded overflow-hidden shadow-lg profile-card p-6 flex-col relative ${containerClass}`}>
+<div className={`w-full rounded overflow-hidden profile-card p-6 flex-col relative ${darkMode === "dark" ? 'bg-neutral-800 text-gray-300' : 'bg-[#ffffff] rounded-md border-[#11111128] text-gray-900 font-semibold border-[1px] mb-2'}`}>
+  <div className="flex items-center gap-4">
+    <div className="relative">
+      <img
+        className="w-24 h-24 rounded-full photo-profile"
+        src={avatar_link || `/public/wakwaw.png`}
+        alt="Profile"
+      />
+      <NavLink
+        to="/profile/avatar/edit"
+        className="custom-edit-avatar-button"
+        title="Edit Avatar"
+      >
+        <MdOutlineEdit className="w-5 h-5" />
+      </NavLink>
+    </div>
+
+    <div className="ml-6 flex-grow">
+      <div className='flex items-center justify-between gap-3'>
+        <div className='flex items-center gap-2'>
+          <h2 className="name text-xl font-bold">
+            {name}
+          </h2>
+          <p className={`username ${textLight}`}>@{username}</p>
         </div>
-        <div className="ml-6 flex-grow">
-          <div className='flex items-center justify-between gap-3'>
-            <div className='flex items-center gap-3'>
-              <h2 className="name text-xl font-bold">
-                {name}
-              </h2>
-              <p className={`username ${textLight}`}>@{username}</p>
+        <div className="relative">
+          <SlOptions
+            className='text-black dark:text-white option cursor-pointer'
+            onClick={toggleMenu}
+          />
+          {menuVisible && (
+            <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-neutral-800 rounded-lg shadow-lg py-1 z-50">
+              <button
+                onClick={handleLogout}
+                className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-neutral-100 dark:hover:bg-neutral-700 w-full text-left"
+              >
+                Logout
+              </button>
             </div>
-            <div className="relative">
-              <SlOptions
-                className='text-black dark:text-white option cursor-pointer'
-                onClick={toggleMenu}
-              />
-              {menuVisible && (
-                <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-neutral-800 rounded-lg shadow-lg py-1 z-50">
-                  <button
-                    onClick={handleLogout}
-                    className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-neutral-100 dark:hover:bg-neutral-700 w-full text-left"
-                  >
-                    Logout
-                  </button>
-                </div>
-              )}
-            </div>
-          </div>
-          <p className="bio mt-5">{bio || "No bio available"}</p>
-          <div className="menu-card mt-6 flex justify-between">
-            <p className="joined-on text-sm flex items-center">
-              Joined on {new Date(created_at).toLocaleDateString()}
-            </p>
-            <div className="menu-buttons gap-3 flex justify-between">
-              <button className="flex-grow h-12">
-              <NavLink
+          )}
+        </div>
+      </div>
+      
+      <p className="bio mt-2 mb-4">{bio || "No bio available"}</p>
+
+      <div className="menu-card mt-4 flex justify-between items-center gap-4">
+        <p className="joined-on text-sm">Joined on {new Date(created_at).toLocaleDateString()}</p>
+        
+        <div className="menu-buttons flex gap-4">
+          <button className="flex-grow h-12">
+            <NavLink
               to="/profile/edit"
               className={({ isActive }) =>
-                `h-full flex items-center justify-center transition-colors duration-300 ease-in-out w-full text-center ${
-                  isActive
-                    ? `${darkMode === 'dark' ? 'bg-neutral-700 text-white' : 'bg-[#ffe28a] text-black border-neutral-950 border-4 shadow-xl'}`
-                    : `${darkMode === 'dark' ? 'bg-neutral-900 text-white hover:bg-neutral-800' : 'bg-[#fff6c1] text-black hover:bg-[#ffdd9d] border-neutral-950 border-4 shadow-xl'}`
-                }`
+                `p-4 transition-colors duration-300 ease-in-out w-full text-center flex justify-center items-center ${darkMode === 'dark'
+                  ? `bg-neutral-800 ${isActive ? 'border-b-2 border-white text-white' : 'text-gray-400 hover:bg-neutral-700'}`
+                  : `bg-[#ffffff] rounded-md border-[#11111128] text-gray-900 font-semibold border-[1px] ${isActive ? 'border-black text-black' : 'text-gray-600 hover:bg-slate-300'}`}`
               }
             >
               Edit Profile
             </NavLink>
-
-              </button>
-              <button className="flex-grow h-12">
-                <NavLink
-                  to="/upload"
-                  className={({ isActive }) =>
-                    `h-full flex items-center justify-center transition-colors duration-300 ease-in-out w-full text-center ${
-                      isActive
-                        ? `${darkMode === 'dark' ? 'bg-neutral-700 text-white' : 'bg-[#ffe28a] text-black border-neutral-950 border-4 shadow-xl'}`
-                        : `${darkMode === 'dark' ? 'bg-neutral-900 text-white hover:bg-neutral-800' : 'bg-[#fff6c1] text-black hover:bg-[#ffdd9d] border-neutral-950 border-4 shadow-xl'}`
-                    }`
-                  }
-                >
-                  Create Post
-                </NavLink>
-              </button>
-            </div>
-
-          </div>
+          </button>
+          
+          <button className="flex-grow h-12">
+            <NavLink
+              to="/upload"
+              className={({ isActive }) =>
+                `p-4 transition-colors duration-300 ease-in-out w-full text-center flex justify-center items-center ${darkMode === 'dark'
+                  ? `bg-neutral-800 ${isActive ? 'border-b-2 border-white text-white' : 'text-gray-400 hover:bg-neutral-700'}`
+                  : `bg-[#ffffff] rounded-md border-[#11111128] text-gray-900 font-semibold border-[1px] ${isActive ? 'border-black text-black' : 'text-gray-600 hover:bg-slate-300'}`}`
+              }
+            >
+              Create Post
+            </NavLink>
+          </button>
         </div>
       </div>
     </div>
+  </div>
+</div>
+
 
   );
 };

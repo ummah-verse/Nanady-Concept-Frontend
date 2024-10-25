@@ -9,8 +9,8 @@ const CreatePostLayout = () => {
   const darkMode = localStorage.getItem('theme') || 'light'; // Get theme from localStorage
 
   return (
-    <div className={`content-container p-6 mx-auto ${darkMode === "dark" ? 'bg-neutral-800 text-gray-300' : 'bg-[#ffffff] border-neutral-950 border-4 mb-2'}`}>
-      <nav className="flex justify-center space-x-4 mb-4">
+<div className={`content-container rounded overflow-hidden profile-card p-6 flex-col relative ${darkMode === "dark" ? 'bg-neutral-800 text-gray-300' : 'bg-[#ffffff] rounded-md border-[#11111128] text-gray-900 font-semibold border-[1px] mb-2'}`}>
+<nav className="flex justify-center space-x-4 mb-4">
        <NavLink
           to="yapping"
           className={({ isActive }) =>

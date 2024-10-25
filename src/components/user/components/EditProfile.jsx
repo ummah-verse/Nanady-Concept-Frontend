@@ -141,7 +141,8 @@ const EditProfileForm = ({ initialUsername, initialNama, initialBio }) => {
 
     return (
         <ThemeProvider>
-        <div className={`edit-profile-form p-6 mx-auto w-full ${darkMode === "dark" ? 'bg-neutral-800 text-gray-300' : 'bg-[#ffffff] border-neutral-950 border-4 mb-2'}`}>
+        {/* <div className={` p-6 mx-auto w-full ${darkMode === "dark" ? 'bg-neutral-800 text-gray-300' : 'bg-[#ffffff] border-neutral-950 border-4 mb-2'}`}> */}
+        <div className={`edit-profile-form mx-auto rounded overflow-hidden profile-card p-6 flex-col relative ${darkMode === "dark" ? 'bg-neutral-800 text-gray-300' : 'bg-[#ffffff] rounded-md border-[#11111128] text-gray-900 font-semibold border-[1px] mb-2'}`}>
 
             <div className='flex justify-between'>
                 <h2 className="text-2xl font-bold mb-4">Edit Profile</h2>

@@ -10,8 +10,8 @@ const Ongoing = () => {
 
   return (
     <div className={`content-container`}>
-      <nav className={`flex justify-center space-x-4 w-full  ${darkMode === 'dark' ? 'bg-neutral-900 text-white hover:bg-neutral-800' : 'bg-[#ffdbfd] border-neutral-950 border-4 shadow-xl my-2 mr-0 ml-0 text-black'}`}>
-        <NavLink
+      <nav className={`mt-2 flex items-start p-3 pb-5 px-6 pl-5 pt-4 ${darkMode === "dark" ? 'bg-neutral-800 text-gray-300' : 'bg-[#ffffff] rounded-md border-[#11111128] text-gray-900 font-semibold border-[1px] mb-2'}`}>
+      <NavLink
           to="/ongoing/news"
           className={({ isActive }) =>
             `p-4 transition-colors duration-300 ease-in-out w-full text-center flex justify-center items-center ${

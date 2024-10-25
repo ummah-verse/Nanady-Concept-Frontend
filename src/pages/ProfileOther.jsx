@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'; // Import PropTypes
 const ProfileOther = ({ username }) => {
   const darkMode = localStorage.getItem('theme') || 'light'; // Get theme from localStorage
 
-  const containerClass = darkMode === 'dark' ? 'bg-neutral-900 text-white' : 'text-white bg-[#abffe355] text-black border-neutral-950 border-4 shadow-xl';
+  // const containerClass = darkMode === 'dark' ? 'bg-neutral-900 text-white' : 'text-white bg-[#abffe355] text-black border-neutral-950 border-4 shadow-xl';
   const textLight = darkMode === 'dark' ? 'text-gray-300' : 'text-gray-900 font-semibold';
 
   const [profileData, setProfileData] = useState(null);
@@ -59,7 +59,9 @@ const ProfileOther = ({ username }) => {
   const { name, bio, created_at, avatar_link } = profileData;
 
   return (
-    <div className={`w-full rounded overflow-hidden shadow-lg profile-card p-6 flex-col relative ${containerClass}`}>
+    // <div className={`w-full rounded overflow-hidden shadow-lg profile-card p-6 flex-col relative ${containerClass}`}>
+    <div className={`w-full rounded overflow-hidden profile-card p-6 flex-col relative ${darkMode === "dark" ? 'bg-neutral-800 text-gray-300' : 'bg-[#ffffff] rounded-md border-[#11111128] text-gray-900 font-semibold border-[1px] mb-0'}`}>
+
       <div className="flex items-center">
         <img
           className="w-24 h-24 rounded-full photo-profile"

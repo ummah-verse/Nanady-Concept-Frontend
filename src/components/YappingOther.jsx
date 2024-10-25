@@ -144,7 +144,7 @@ const YappingOther = ({ username }) => {
 
     const renderPosts = postsData.slice(0, visiblePosts).map((postData) => (
         <NavLink className="yapping-post" key={postData.id} to={`/yapping/${postData.id}`}>
-            <div className={`flex items-start p-3 pb-5 px-6 pl-5 pt-4 ${darkMode === "dark" ? 'bg-neutral-800 text-gray-300' : 'bg-[#ffffff] border-neutral-950 text-gray-900 font-semibold shadow-xl border-4 mt-2 mb-2'}`}>
+            <div className={`mt-2 flex items-start p-3 pb-5 px-6 pl-5 pt-4 ${darkMode === "dark" ? 'bg-neutral-800 text-gray-300' : 'bg-[#ffffff] rounded-md border-[#11111128] text-gray-900 font-semibold border-[1px] mb-2'}`}>
             {/* Profile Image */}
                 <img
                     className="w-10 h-10 image-icon rounded-full flex items-center"
@@ -194,22 +194,24 @@ const YappingOther = ({ username }) => {
                                     handleLike(postData.id);
                                 }}
                             >
-                                {postData.isLiked ? <BiSolidLike className="like-icon text-red-500" /> : <BiLike className={`like-icon ${darkMode === 'dark' ? 'text-white ' : 'text-neutral-900 font-semibold'}`} />}
+                                {postData.isLiked ? <BiSolidLike className="like-icon text-red-500" /> : <BiLike className={`like-icon ${darkMode === 'dark' ? 'text-white ' : 'text-neutral-900 font-semibold'}`}/>}
                                 <span className={`ml-1 like-content ${darkMode === 'dark' ? 'text-white ' : 'text-neutral-900 font-semibold'}`}>{postData.total_likes}</span>
                             </button>
                             <button className="flex items-center hover:text-blue-500">
-                                <GoComment className={`comment-icon ${darkMode === 'dark' ? 'text-white ' : 'text-neutral-900 font-semibold'}`} />
-                                <span className={`ml-1 comment-content ${darkMode === 'dark' ? 'text-white ' : 'text-neutral-900 font-semibold'}`}>{postData.total_comments || 0}</span>
+                                <NavLink className='flex' to={`/yapping/${postData.id}`}>
+                                    <GoComment className={`comment-icon ${darkMode === 'dark' ? 'text-white ' : 'text-neutral-900 font-semibold'}`} />
+                                    <span className={`ml-1 comment-content ${darkMode === 'dark' ? 'text-white ' : 'text-neutral-900 font-semibold'}`}>{postData.total_comments || 0}</span>
+                                </NavLink>
                             </button>
                         </div>
                         <div className="flex gap-5">
-                            <div className="flex items-center mt-5">
+                            <div className={`flex items-center mt-5 ${darkMode === 'dark' ? 'text-white ' : 'text-neutral-900 font-semibold'}`}>
                                 <IoLocationOutline className="location-icon" />
                                 <p className="date-content ml-1">
                                     {postData.location ?? '-'}
                                 </p>
                             </div>
-                            <div className="flex items-center mt-5">📅
+                            <div className={`flex items-center mt-5 ${darkMode === 'dark' ? 'text-white ' : 'text-neutral-900 font-semibold'}`}>📅
                                 <p className="date-content ml-1">
                                     {new Date(postData.created_at).toLocaleDateString()}
                                 </p>

@@ -14,7 +14,7 @@ const Profile = () => {
   return (
     <div className={`content-container ${containerClass}`}>
       <ProfileCard />
-      <nav className={`flex justify-center space-x-4 w-full  ${darkMode === 'dark' ? 'bg-neutral-900 text-white hover:bg-neutral-800' : 'bg-[#ffdbfd] border-neutral-950 border-4 shadow-xl my-2 text-black'}`}>
+      <nav className={`mt-2 flex items-start p-3 pb-5 px-6 pl-5 pt-4 ${darkMode === "dark" ? 'bg-neutral-800 text-gray-300' : 'bg-[#ffffff] rounded-md border-[#11111128] text-gray-900 font-semibold border-[1px] mb-2'}`}>
       <NavLink
           to="/profile/yapping"
           className={({ isActive }) =>
