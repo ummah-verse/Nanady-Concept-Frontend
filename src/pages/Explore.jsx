@@ -51,11 +51,14 @@ const Explore = () => {
   }, [searchTerm]);
 
   return (
-    <div className={`content-container p-3 pb-5 px-6 pl-5 pt-4 ${darkMode === "dark" ? 'bg-neutral-800 text-gray-300' : 'bg-[#ffffff] border-neutral-950 text-gray-900 font-semibold shadow-xl border-4 mb-2'}`}>
+        // <div className={`content-container p-3 pb-5 px-6 pl-5 pt-4 ${darkMode === "dark" ? 'bg-neutral-800 text-gray-300' : 'bg-[#ffffff] border-neutral-950 text-gray-900 font-semibold shadow-xl border-4 mb-2'}`}>
+
+    <div className={`content-container p-3 pb-5 px-6 pl-5 pt-4 ${darkMode === "dark" ? 'bg-neutral-800 text-gray-300' : 'bg-[#ffffff] rounded-md border-[#11111128] text-gray-900 font-semibold border-[1px] mb-2'}`}>
       <div className="flex justify-center items-center mb-4">
         <input
           type="text"
-          className="bg-neutral-800 p-3 w-full text-white focus:ring-0 search-bar"
+          className={` p-3 w-full focus:ring-0 search-bar ${darkMode === "dark" ? 'bg-neutral-800 text-gray-300' : 'bg-[#ffffff] rounded-md border-[#11111128] text-gray-900 font-semibold border-[1px] mb-2'}`}
+          // className="bg-neutral-800 p-3 w-full text-white focus:ring-0 search-bar"
           placeholder="Search for a user..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}

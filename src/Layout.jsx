@@ -3,6 +3,11 @@ import { useEffect, useState } from 'react';
 import Navbar from './components/Navbar';
 import './Main.css';
 import ReminderNotification from './components/ReminderNotification';
+import RightFeature from './RightFeature';
+import LeftFeature from './LeftFeature';
+import './sidefeature.css'
+
+
 
 
 
@@ -94,9 +99,18 @@ const Layout = () => {
       <Navbar />
         <ReminderNotification />
       </div>
-      <div className="container mx-auto flex justify-center content-outlet p-4">
-        <Outlet /> {/* This will render the content based on the route */}
+
+      <div className="w-full flex justify-between content-outlet p-4">
+          <div className='left-feature side-feature '>
+            <LeftFeature/>
+          </div>        
+          <Outlet /> {/* This will render the content based on the route */}
+
+          <div className='right-feature side-feature '>
+          <RightFeature/>
+          </div>   
       </div>
+
     </div>
   );
 };

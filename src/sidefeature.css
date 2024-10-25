@@ -1,0 +1,14 @@
+.side-feature {
+    min-width: 300px;
+    max-width: 300px;
+}
+
+.left-feature {
+    position: static;
+}
+
+@media (orientation: portrait) {
+    .side-feature {
+        display: none;
+    }
+}

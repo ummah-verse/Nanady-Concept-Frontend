@@ -71,11 +71,14 @@ const Reminder = () => {
 
     // Render posts grouped by date
     const renderPosts = Object.keys(groupedData).map((date, index) => (
-        <div className={`text-xl font-bold text-gray-300 ${darkMode === "dark" ? 'bg-neutral-800 text-gray-300' : 'bg-[#ffffff] border-neutral-950 text-gray-900 font-semibold shadow-xl border-4 mt-2 mb-2'}`} key={index}>
+                // <div className={`text-xl font-bold text-gray-300 ${darkMode === "dark" ? 'bg-neutral-800 text-gray-300' : 'bg-[#ffffff] border-neutral-950 text-gray-900 font-semibold shadow-xl border-4 mt-2 mb-2'}`} key={index}>
+
+        <div key={index} className={`mt-2 p-3 pb-5 px-6 pl-5 pt-4 ${darkMode === "dark" ? 'bg-neutral-800 text-gray-300' : 'bg-[#ffffff] rounded-md border-[#11111128] text-gray-900 font-semibold border-[1px] mb-2'}`}>
+
             <h2 className={`text-xl font-bold p-4 ${darkMode === "dark" ? 'bg-neutral-800 text-gray-300' : 'bg-[#ffffff] border-neutral-950 text-gray-900 mb-4'}`}>{date}</h2>
 
             {groupedData[date].slice(0, visiblePosts).map((reminderData, idx) => (
-                <div key={reminderData.id} className="p-3 pb-5 px-6 pl-5 shadow-md reminder-post pt-0">
+                <div key={reminderData.id} className={`p-3 pb-5 px-6 pl-5 reminder-post pt-0 ${darkMode === 'dark' ? '' : 'border-b-[1px] border-[#11111128] '}`}>
                     {idx === 0 && (
                         <div className="flex items-start">
                             <img

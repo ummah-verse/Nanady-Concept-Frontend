@@ -12,8 +12,11 @@ const Home = () => {
 
   return (
     <div className="content-container p-2 mx-auto"> {/* Default container styles */}
+
+
       {/* Dark mode styling applied only to the nav */}
-      <nav className={`flex justify-center space-x-4 w-full ${darkMode === 'dark' ? 'bg-neutral-800 text-gray-300' : ' border-neutral-950 border-4 mb-2 bg-[#faffb2ee]'}`}>
+      <nav className={`mt-2 flex items-start p-3 pb-5 px-6 pl-5 pt-4 ${darkMode === "dark" ? 'bg-neutral-800 text-gray-300' : 'bg-[#ffffff] rounded-md border-[#11111128] text-gray-900 font-semibold border-[1px] mb-2'}`}>
+      {/* <nav className={`flex justify-center space-x-4 w-full ${darkMode === 'dark' ? 'bg-neutral-800 text-gray-300' : ' border-neutral-950 border-4 mb-2 bg-[#faffb2ee]'}`}> */}
         <NavLink
           to="/yapping"
           className={({ isActive }) =>
@@ -43,7 +46,9 @@ const Home = () => {
       </nav>
 
       <div className="content">
+
         <Outlet /> {/* Nested components will be rendered here */}
+
       </div>
     </div>
   );

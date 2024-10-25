@@ -17,7 +17,7 @@ const ProfileCard = () => {
   console.log("dar", darkMode)
 
   // Define classes for dark and light modes
-  const containerClass = darkMode === 'dark' ? 'bg-neutral-900 text-white' : 'bg-[#abffe355] text-black border-neutral-950 border-4 shadow-xl';
+  const containerClass = darkMode === 'dark' ? 'bg-neutral-900 text-white' : 'bg-[#ebfff8] text-black border-neutral-950 border-4 shadow-xl';
   const textLight = darkMode === 'dark' ? '' : 'text-gray-900 font-semibold';
 
   const toggleMenu = () => {
