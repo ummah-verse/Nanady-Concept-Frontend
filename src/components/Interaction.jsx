@@ -52,7 +52,7 @@ const Interaction = () => {
                 if (data.status) {
                     const notifications = data.data.map(notification => ({
                         username: notification.byusers.username,
-                        profileImage: notification.byusers.avatar_link || `/public/wakwaw.png`, 
+                        profileImage: notification.byusers.avatar_link || `https://ik.imagekit.io/eoeykxtr4/wakwaw.png?updatedAt=1729922813457`, 
                         action: notification.detail,
                         created_at: notification.created_at,
                         isRead: false, 

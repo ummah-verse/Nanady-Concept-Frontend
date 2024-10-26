@@ -83,7 +83,7 @@ const Reminder = () => {
                         <div className="flex items-start">
                             <img
                                 className="w-10 h-10 image-icon rounded-full"
-                                src={reminderData.users?.avatar_link || `/public/wakwaw.png`}
+                                src={reminderData.users?.avatar_link || `https://ik.imagekit.io/eoeykxtr4/wakwaw.png?updatedAt=1729922813457`}
                                 alt="Profile"
                             />
                             <div className="ml-4 flex-col flex-start">

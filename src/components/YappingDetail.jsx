@@ -91,7 +91,7 @@ const YappingDetail = () => {
                 <div className="flex items-start mb-4">
                     <img
                         className="w-12 h-12 image-icon rounded-full"
-                        src={postData.users.avatar_link || `/public/wakwaw.png`}
+                        src={postData.users.avatar_link || `https://ik.imagekit.io/eoeykxtr4/wakwaw.png?updatedAt=1729922813457`}
                         alt="Profile"
                     />
                     <div className="ml-4">

@@ -65,7 +65,7 @@ const ProfileOther = ({ username }) => {
       <div className="flex items-center">
         <img
           className="w-24 h-24 rounded-full photo-profile"
-          src={avatar_link || `/public/wakwaw.png`}
+          src={avatar_link || `https://ik.imagekit.io/eoeykxtr4/wakwaw.png?updatedAt=1729922813457`}
           alt="Profile"
         />
         <div className="ml-6 flex-grow">

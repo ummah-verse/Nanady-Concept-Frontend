@@ -148,7 +148,7 @@ const YappingOther = ({ username }) => {
             {/* Profile Image */}
                 <img
                     className="w-10 h-10 image-icon rounded-full flex items-center"
-                    src={postData.users.avatar_link || `/public/wakwaw.png`} 
+                    src={postData.users.avatar_link || `https://ik.imagekit.io/eoeykxtr4/wakwaw.png?updatedAt=1729922813457`} 
                     alt="Profile"
                 />
                 {/* Content */}
