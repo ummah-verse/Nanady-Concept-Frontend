@@ -2,11 +2,13 @@ import { useState, useEffect } from 'react';
 import { Toast } from 'flowbite-react'; // Import Flowbite components
 import './styles/YappingForm.css';
 import LoadingPopup from './atom/LoadingPopup'
+import InstructionModal from './InstructionModal';
 const YappingForm = () => {
   const darkMode = localStorage.getItem('theme') || 'light'; // Get theme from localStorage
 
   console.log(darkMode)
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoadingSubmit, setIsLoadingSubmit] = useState(false);
   const [photo, setPhoto] = useState(null);
   const [caption, setCaption] = useState('');
@@ -301,7 +303,31 @@ const YappingForm = () => {
         >
           {isLoadingSubmit ? 'Uploading' : 'Submit'}
         </button>
+
       </form>
+
+      <div className="flex justify-end items-end mt-4">
+        <button 
+          onClick={() => setIsModalOpen(true)} 
+          className={`flex items-center mt-2 ${
+            darkMode === "dark" ? "text-gray-300 hover:text-blue-400" : "text-neutral-700 hover:text-blue-600"
+          }`}
+        >
+          <span className="mr-1 underline">Instruction</span>
+          <span role="img" aria-label="info">❓</span>
+        </button>
+      </div>
+
+
+
+      {/* Modal */}
+      {isModalOpen && (
+        <InstructionModal 
+          onClose={() => setIsModalOpen(false)} 
+          darkMode={darkMode} 
+        />
+      )}
+
 
       {/* LoadingPopup dihapus karena tidak digunakan */}
       <LoadingPopup isLoadingSubmit={isLoadingSubmit} />
@@ -679,7 +705,8 @@ export default YappingForm;
 //       const token = localStorage.getItem('token');
 
 //       const response = await fetch(`${import.meta.env.VITE_API_URL}/my-yapping`, {
-//         method: 'POST',
+//         method: 'POST',import InstructionModal from './InstructionModal';
+
 
 //         body: formData,
 //         headers: {

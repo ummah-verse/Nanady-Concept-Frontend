@@ -123,6 +123,8 @@ const EditProfileForm = ({ initialUsername, initialNama, initialBio }) => {
             });
     
             const result = await response.json();
+
+            localStorage.setItem('token', result.data.token);
     
             if (result.status) {
                 setToastMessage('Profile updated successfully!');

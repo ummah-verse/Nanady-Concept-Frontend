@@ -32,6 +32,7 @@ import NewsComponent from './components/News';
 import RegisterForm from './pages/Register';
 import UploadProfileForm from './components/user/components/UploadProfileForm.';
 import OtherUserDetail from './pages/OtherUserDetail';
+import Setting from './components/user/components/Setting';
 // import Analytic
 // import MiniDetail from './components/MiniDetail';
 // import DiaryDetail from './components/DiaryDetail';
@@ -90,6 +91,7 @@ root.render(
         <Route path="/profile" element={<Profile />}> 
           <Route index element={<Navigate to="yapping" />} /> 
           <Route path="yapping" element={<UserYapping />} />
+          <Route path="setting" element={<Setting />} />
           <Route path="insight" element={<Analytic />} />
           {/* <Route path="diary" element={<UserDiary />} /> */}
           <Route path="edit" element={<EditProfile />} />

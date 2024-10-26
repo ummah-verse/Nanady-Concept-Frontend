@@ -24,6 +24,10 @@ const ProfileCard = () => {
     setMenuVisible(!menuVisible);
   };
 
+  const handleSetting = () => {
+    navigate('/profile/setting');
+  };
+
   useEffect(() => {
     const fetchProfile = async () => {
       try {
@@ -104,16 +108,37 @@ const ProfileCard = () => {
             className='text-black dark:text-white option cursor-pointer'
             onClick={toggleMenu}
           />
-          {menuVisible && (
-            <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-neutral-800 rounded-lg shadow-lg py-1 z-50">
-              <button
-                onClick={handleLogout}
-                className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-neutral-100 dark:hover:bg-neutral-700 w-full text-left"
-              >
-                Logout
-              </button>
-            </div>
-          )}
+{menuVisible && (
+  <div
+    className={`absolute right-0 mt-2 w-48 rounded-lg shadow-md z-50 ${
+      darkMode === "dark" ? "bg-neutral-800" : "bg-[#f0f0f0ee]"
+    }`}
+  >
+    <button
+      onClick={handleSetting}
+      className={`block px-4 py-2 text-sm w-full text-left ${
+        darkMode === "dark"
+          ? "text-gray-200 hover:bg-neutral-700"
+          : "text-gray-700 hover:bg-neutral-300"
+      }`}
+    >
+      Settings
+    </button>
+    <button
+      onClick={handleLogout}
+      className={`block px-4 py-2 text-sm w-full text-left ${
+        darkMode === "dark"
+          ? "text-gray-200 hover:bg-neutral-700"
+          : "text-gray-700 hover:bg-neutral-300"
+      }`}
+    >
+      Logout
+    </button>
+  </div>
+)}
+
+
+
         </div>
       </div>
       

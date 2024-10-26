@@ -20,14 +20,23 @@ const Yapping = () => {
         const fetchPosts = async () => {
             try {
                 const token = localStorage.getItem('token');
+                const hide = JSON.parse(localStorage.getItem('selectedCategories') || '{}'); // Fallback to empty object if not found
 
-                const response = await fetch(`${import.meta.env.VITE_API_URL}/yapping`, {
+                console.log(hide)
+
+                const queryParams = new URLSearchParams(hide).toString(); 
+
+                console.log(queryParams)
+
+                const response = await fetch(`${import.meta.env.VITE_API_URL}/yapping?${queryParams}`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${token}` // Include the Bearer token
                     }
                 });
+
+                
 
                 const result = await response.json();
                 
