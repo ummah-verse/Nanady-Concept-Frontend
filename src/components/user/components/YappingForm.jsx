@@ -196,7 +196,7 @@ const YappingForm = () => {
           <input
             type="file"
             id="photo"
-            accept="image/*"
+            accept="image/*,video/*"
             className={`p-4 rounded w-full focus:outline-none  ${darkMode === "dark" ? 'bg-neutral-800  ' : ' bg-slate-200 text-black'}`}
             onChange={handleFileChange}
             required

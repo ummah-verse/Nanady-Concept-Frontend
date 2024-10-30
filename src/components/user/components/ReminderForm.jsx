@@ -9,6 +9,7 @@ const ReminderForm = () => {
   const [title, setTitle] = useState(''); 
   const [content, setContent] = useState('');
   const [startedDate, setStartedDate] = useState('');
+  const [location, setLocation] = useState('');
   const [deadlineDate, setDeadlineDate] = useState('');
   const [isPublic, setIsPublic] = useState(false);
   const [toast, setToast] = useState({ message: '', type: '', visible: false });
@@ -40,7 +41,7 @@ const ReminderForm = () => {
     formData.append('started_date', formattedStartedDate);
     formData.append('deadline_date', formattedDeadlineDate);
     formData.append('created_date', createdDate);
-    formData.append('location', 'Office');
+    formData.append('location', location);
     formData.append('is_public', isPublic ? '1' : '0');
 
     try {
@@ -142,6 +143,8 @@ const ReminderForm = () => {
           <input 
             type="text" 
             id="location" 
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
             className={`p-4 rounded w-full focus:outline-none ${darkMode === "dark" ? 'bg-neutral-800  ' : ' bg-slate-200 text-black'}`}
             required
           />

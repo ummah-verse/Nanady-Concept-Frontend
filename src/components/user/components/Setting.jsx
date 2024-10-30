@@ -73,7 +73,7 @@ const Setting = () => {
             />
             Male
           </label>
-          <label className="flex items-center mb-2">
+          {/* <label className="flex items-center mb-2">
             <input
               type="checkbox"
               name="nonHijab"
@@ -92,7 +92,7 @@ const Setting = () => {
               className="mr-2"
             />
             Anime
-          </label>
+          </label> */}
         </form>
       </div>
     </div>

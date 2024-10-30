@@ -80,7 +80,7 @@ const UploadProfileForm = () => {
               accept="image/*"
               onChange={handleFileChange}
               
-              className={`p-4 text-white focus:outline-none w-full ${darkMode === "dark" ? 'bg-neutral-800 text-gray-300' : 'bg-[#ffffff] rounded-md border-[#11111128] text-gray-900 font-semibold border-[1px] mb-2'}`}
+              className={`p-4 focus:outline-none w-full ${darkMode === "dark" ? 'bg-neutral-800 text-gray-300' : 'bg-[#ffffff] rounded-md border-[#11111128] text-gray-900 font-semibold border-[1px] mb-2'}`}
             />
           </div>
         </div>

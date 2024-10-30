@@ -53,6 +53,8 @@ const Reminder = () => {
         return groups;
     }, {});
 
+    console.log(groupedData)
+
     const closePopup = () => {
         setIsOpen(false);
         setSelectedImage('');
@@ -88,7 +90,7 @@ const Reminder = () => {
                             />
                             <div className="ml-4 flex-col flex-start">
                                 <p className={`text-lg font-semibold  ${darkMode === "dark" ? 'bg-neutral-800 text-gray-300' : 'bg-[#ffffff] border-neutral-950 text-gray-900'}`}>{reminderData.users?.username || 'Unknown User'}</p>
-                                <p style={ { fontSize : '12px'}} className={`font-semibold p-0 m-0 ${darkMode === "dark" ? 'bg-neutral-800 text-gray-300' : 'bg-[#ffffff] border-neutral-950 text-gray-900'}`}>{reminderData.users?.location || 'unknown location'}</p>
+                                <p style={ { fontSize : '12px'}} className={`font-semibold p-0 m-0 ${darkMode === "dark" ? 'bg-neutral-800 text-gray-300' : 'bg-[#ffffff] border-neutral-950 text-gray-900'}`}>{reminderData.location || 'unknown location'}</p>
 
                             </div>
                         </div>
