@@ -72,6 +72,8 @@ const Comment = ({ yappinId }) => {
             });
 
             const result = await response.json();
+
+            console.log(result)
             if (result.status) {
                 // Tambahkan komentar baru ke daftar tanpa mengambil ulang semua komentar
                 setComments([...comments, result.data]);

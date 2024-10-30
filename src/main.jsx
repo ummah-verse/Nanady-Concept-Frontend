@@ -33,6 +33,7 @@ import RegisterForm from './pages/Register';
 import UploadProfileForm from './components/user/components/UploadProfileForm.';
 import OtherUserDetail from './pages/OtherUserDetail';
 import Setting from './components/user/components/Setting';
+import Landing from './home/Landing';
 // import Analytic
 // import MiniDetail from './components/MiniDetail';
 // import DiaryDetail from './components/DiaryDetail';
@@ -50,6 +51,12 @@ root.render(
       <Route path="/register" element={<App />} />
       <Route path="/register" element={<App />}> 
         <Route path="" element={<RegisterForm />} />
+      </Route>
+
+
+      <Route path="/home" element={<Landing />} />
+      <Route path="/home" element={<Landing />}> 
+        <Route path="" element={<Landing/>} />
       </Route>
 
       <Route path="/" element={<Layout/>}>
