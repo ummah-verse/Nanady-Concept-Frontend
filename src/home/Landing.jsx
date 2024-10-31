@@ -37,9 +37,6 @@ const Landing = () => {
         <div className={`p-0 flex flex-col min-h-screen ${darkMode === 'dark' ? 'bg-neutral-900 text-gray-300' : 'bg-[#f8f8f8] rounded-md border-[#11111128] font-semibold border-[1px]'}`}>
             <NavbarLanding />
 
-
-
-            
             <main className={`p-3 pt-[142px] flex-1 w-full`}> {/* Adjusted pt-20 for more space */}
 
             <div className='flex flex-col justify-center items-center'>
@@ -96,9 +93,6 @@ const Landing = () => {
                     </a>
                 </section>
 
-
-
-
                 <section className="w-full col-span-5 mt-10 text-left pl-[4rem]">
                     {/* <h2 className="text-3xl font-bold mb-6">Our Products</h2> */}
                     <ImageCarousel/>
@@ -142,7 +136,6 @@ const Landing = () => {
 
 
                         <h2 className="text-4xl text-neutral-800 font-bold text-center mb-10">Our Mission</h2>
-    
                         <ul className="space-y-6 mb-6">
                             <li className="flex items-start">
                                 <span className="mr-2">🌟</span>
@@ -150,29 +143,24 @@ const Landing = () => {
                                     <span className="text-black font-semibold">Empowerment</span> — We aim to empower individuals by focusing on informative, high-quality, productive, and creative content to be spread.
                                 </span>
                             </li>
-
                             <li className="flex items-start">
                                 <span className="mr-2">🌍</span>
                                 <span className="flex-1 text-[#303030]">
                                     <span className="text-black font-semibold">Global Issues Awareness</span> — We aim to raise awareness about pressing global challenges such as climate change, hunger, conflict, and genocide, fostering a community dedicated to advocating for positive change and supporting those in need.
                                 </span>
                             </li>
-
                             <li className="flex items-start">
                                 <span className="mr-2">🔞</span>
                                 <span className="flex-1 text-[#303030]">
                                     <span className="text-black font-semibold">Say No To Vulgarism</span> — Our mission is to eliminate all explicit sexual content and combat the pornography industry and sex trafficking.
                                 </span>
                             </li>
-
                             <li className="flex items-start">
                                 <span className="mr-2">🤚🏻</span>
                                 <span className="flex-1 text-[#303030]">
                                     <span className="text-black font-semibold">Protect Kids</span> — Our goal is to safeguard children by raising awareness about inappropriate social media practices, ensuring parental guidance over online content, and preventing exposure to pornography from an early age.
                                 </span>
                             </li>
-
-
                             <li className="flex items-start">
                                 <span className="mr-2">🕊️</span>
                                 <span className="flex-1 text-[#303030]">
@@ -185,48 +173,37 @@ const Landing = () => {
                                     <span className="text-black font-semibold">Creativity</span> — We encourage creativity and innovation in our community by providing tools and support for creators.
                                 </span>
                             </li>
-
                             <li className="flex items-start">
                                 <span className="mr-2">🎲</span>
                                 <span className="flex-1 text-[#303030]">
                                     <span className="text-black font-semibold">Combat Online Gambling</span> — We are committed to preventing the spread of illegal activities by allowing links only from reputable and established websites, ensuring a safe online community.
                                 </span>
                             </li>
-
                             <li className="flex items-start">
                                 <span className="mr-2">🗣️</span>
                                 <span className="flex-1 text-[#303030]">
                                     <span className="text-black font-semibold">Normalize Using Kind and Polite Language</span> — We promote a culture of respect and kindness, encouraging users to communicate thoughtfully and courteously, fostering a positive community for all.
                                 </span>
                             </li>
-
-
                             <li className="flex items-start">
                                 <span className="mr-2">👗</span>
                                 <span className="flex-1 text-[#303030]">
                                     <span className="text-black font-semibold">Being Modest and Casual</span> — We encourage our community to embrace attire that is respectful and comfortable, avoiding clothing that may provoke negativity or inappropriate attention.
                                 </span>
                             </li>
-
                             <li className="flex items-start">
                                 <span className="mr-2">✊🏿</span>
                                 <span className="flex-1 text-[#303030]">
                                     <span className="text-black font-semibold">Stop Racism and Cyberbullying</span> — We strive to create an inclusive online environment by actively combating racism and cyberbullying through education, community support, and strict moderation policies.
                                 </span>
                             </li>
-
-
                             <li className="flex items-start">
                                 <span className="mr-2">🧠</span>
                                 <span className="flex-1 text-[#303030]">
                                     <span className="text-black font-semibold">Addiction and Mental Health</span> — We strive to promote healthy usage of social media by raising awareness about the effects of excessive screen time on mental health and encouraging users to take breaks and engage in real-life interactions.
                                 </span>
                             </li>
-
-
                         </ul>
-
-
                         <div className="flex mt-10 justify-center bg-gray-50">
                                 <div className="w-full">
                                     <h2 className="text-4xl font-bold text-center text-neutral-800 mb-12">Powered By</h2>
@@ -272,8 +249,6 @@ const Landing = () => {
                                     </p>
                                     <a href="mailto:naufalandya@outlook.com" className="mt-auto px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-200">Join Us</a>
                                     </div>
-
-
                                 {isModalOpen && (
                                 <div className="fixed inset-0 bg-white bg-opacity-50 flex items-center justify-center z-50">
                                     <div className="bg-white p-8 rounded-lg shadow-lg max-w-sm w-full relative">
@@ -284,15 +259,7 @@ const Landing = () => {
                                     </div>
                                 </div>
                             )}
- 
                         </div>
-
-
-
-
-
-
-
                     </div>
 
                 </section>
