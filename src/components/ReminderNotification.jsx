@@ -4,8 +4,6 @@ import { Toast } from 'flowbite-react';
 // ReminderNotification.js
 const ReminderNotification = () => {
   const [toastMessage, setToastMessage] = useState(null);
-
-  // Function to fetch reminders from the API
   const fetchReminders = async () => {
     try {
       const token = localStorage.getItem('token');
@@ -19,7 +17,7 @@ const ReminderNotification = () => {
 
       if (response.ok) {
         const data = await response.json();
-        storeReminders(data.data); // Store fetched reminders in localStorage
+        storeReminders(data.data); 
       } else {
         throw new Error('Failed to fetch reminders');
       }
@@ -28,60 +26,51 @@ const ReminderNotification = () => {
     }
   };
 
-  // Function to store reminders in localStorage
   const storeReminders = (reminders) => {
     const storedReminders = reminders.map((reminder) => ({
       id: reminder.id,
       title: reminder.title,
-      started_date: new Date(reminder.started_date).getTime(), // Convert to timestamp for easy comparison
-      is_shown: false, // Default to false
+      started_date: new Date(reminder.started_date).getTime(), 
+      is_shown: false,
     }));
 
     localStorage.setItem('reminders', JSON.stringify(storedReminders));
   };
 
-  // Function to check notifications from localStorage
   const checkNotifications = () => {
     const storedReminders = JSON.parse(localStorage.getItem('reminders')) || [];
     const now = new Date().getTime();
 
     storedReminders.forEach((reminder) => {
-      // Check if the current time is equal to the reminder's started_date and not shown yet
       if (!reminder.is_shown && reminder.started_date <= now && reminder.started_date > now - 1000) {
-        // Notify the user
         setToastMessage(`Reminder "${reminder.title}" has started!`);
 
-        // Mark as shown in localStorage
-        reminder.is_shown = true; // Update to true
+        reminder.is_shown = true; 
       }
     });
 
-    // Update localStorage with modified reminders
     localStorage.setItem('reminders', JSON.stringify(storedReminders));
   };
 
-  // UseEffect to fetch reminders when the component mounts
   useEffect(() => {
-    fetchReminders(); // Fetch reminders when the component mounts
+    fetchReminders(); 
   }, []);
 
-  // Close toast message
   const closeToast = () => {
     setToastMessage(null);
   };
 
-  // Check for reminders every second
   useEffect(() => {
-    const intervalId = setInterval(() => {
-      checkNotifications(); // Check notifications from localStorage
-    }, 1000); // Check every second
 
-    return () => clearInterval(intervalId); // Cleanup on unmount
+    const intervalId = setInterval(() => {
+      checkNotifications(); 
+    }, 1000);
+
+    return () => clearInterval(intervalId); 
   }, []);
 
   return (
     <div>
-      {/* Render the toast message */}
       {toastMessage && (
         <div className="fixed bottom-5 right-5 custom-toast">
           <Toast className={`bg-neutral-600 text-neutral-200`}>
