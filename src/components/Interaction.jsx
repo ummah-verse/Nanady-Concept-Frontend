@@ -40,7 +40,7 @@ const Interaction = () => {
         const fetchNotifications = async () => {
             try {
                 const token = localStorage.getItem('token'); 
-                const response = await fetch('http://103.196.155.16/api/notifications', {
+                const response = await fetch(`${import.meta.env.API_NOTIFICATION}`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
